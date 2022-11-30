@@ -1,20 +1,22 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
-    namespace 'com.aaaabima.moodas'
-    compileSdk 32
+    def globalConfig = rootProject.extensions.getByName("ext")
+
+    compileSdk globalConfig["compileSdkVersion"]
 
     defaultConfig {
-        applicationId "com.aaaabima.moodas"
-        minSdk 21
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        applicationId globalConfig["applicationId"]
+        minSdk globalConfig["minSdkVersion"]
+        targetSdk globalConfig["targetSdkVersion"]
+        versionCode globalConfig["versionCode"]
+        versionName globalConfig["versionName"]
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner globalConfig["testInstrumentationRunner"]
     }
 
     buildTypes {
@@ -30,15 +32,46 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        dataBinding true
+    }
+    kapt {
+        generateStubs = true
+    }
 }
 
 dependencies {
+    def appDependencies = rootProject.ext.appDependencies
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.7.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    implementation project(':data')
+    implementation project(':domain')
+
+    implementation appDependencies.coreKtx
+    implementation appDependencies.appCompat
+    implementation appDependencies.material
+    implementation appDependencies.constraintLayout
+    implementation appDependencies.glide
+    implementation appDependencies.circularImageView
+    implementation appDependencies.swipeRefreshLayout
+    implementation appDependencies.timber
+    implementation appDependencies.dagger
+    implementation appDependencies.rxJava
+    implementation appDependencies.rxAndroid
+    implementation appDependencies.mmkv
+    implementation appDependencies.gson
+    implementation appDependencies.retrofit
+    implementation appDependencies.okHttp
+
+    kapt appDependencies.daggerCompiler
+    kapt appDependencies.glideCompiler
+
+    testImplementation appDependencies.archCoreTesting
+    testImplementation appDependencies.mockk
+    testImplementation appDependencies.junit
+    testImplementation appDependencies.mockito
+    testImplementation appDependencies.powerMock
+    testImplementation appDependencies.powerMockModule
+    testImplementation appDependencies.powerMockApi
+    androidTestImplementation appDependencies.androidJunit
+    androidTestImplementation appDependencies.espresso
 }

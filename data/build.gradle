@@ -1,0 +1,68 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    def globalConfig = rootProject.extensions.getByName("ext")
+
+    compileSdk globalConfig["compileSdkVersion"]
+
+    defaultConfig {
+        minSdk globalConfig["minSdkVersion"]
+        targetSdk globalConfig["targetSdkVersion"]
+        versionCode globalConfig["versionCode"]
+        versionName globalConfig["versionName"]
+
+        testInstrumentationRunner globalConfig["testInstrumentationRunner"]
+    }
+
+    buildTypes {
+        debug {
+            // buildConfigField "String", "BASE_URL", ""
+        }
+        release {
+            // buildConfigField "String", "BASE_URL", ""
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    def dataDependencies = rootProject.ext.dataDependencies
+
+    implementation project(':domain')
+
+    implementation dataDependencies.dagger
+    implementation dataDependencies.retrofit
+    implementation dataDependencies.gson
+    implementation dataDependencies.okHttp
+    implementation dataDependencies.rxJava
+    implementation dataDependencies.rxAndroid
+    implementation dataDependencies.roomKtx
+    implementation dataDependencies.mmkv
+    implementation dataDependencies.retrofitRxJava
+    implementation dataDependencies.roomRxJava2
+    implementation dataDependencies.timber
+
+    api dataDependencies.roomRuntime
+
+    kapt dataDependencies.daggerCompiler
+    kapt dataDependencies.roomKapt
+
+    testImplementation dataDependencies.mockk
+    testImplementation dataDependencies.junit
+    testImplementation dataDependencies.mockito
+    testImplementation dataDependencies.powerMock
+    testImplementation dataDependencies.powerMockModule
+    testImplementation dataDependencies.powerMockApi
+}
