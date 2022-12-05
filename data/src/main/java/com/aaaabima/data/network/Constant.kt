@@ -11,6 +11,7 @@ package com.aaaabima.data.network
  * @version Constant, v 0.1 01/12/22 13.14 by Abim (Moch Arya Bima A)
  */
 object Constant {
+
     object Database {
 
         const val DATABASE_NAME = "Movie_DATABASE"
@@ -26,6 +27,8 @@ object Constant {
 
             private const val PREFIX = "movie"
             const val NowPlaying = "$PREFIX/now_playing"
+            const val TopRated = "$PREFIX/top_rated"
+            const val Popular = "$PREFIX/popular"
         }
 
         object Movie {

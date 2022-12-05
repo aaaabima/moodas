@@ -6,9 +6,29 @@
 
 package com.aaaabima.domain.apimovies.repository
 
+import com.aaaabima.domain.apimovies.model.Movie
+import io.reactivex.Observable
+
 /**
  * @author Abim (Moch Arya Bima A) (i-arya.agfian@dana.id)
  * @version ApiMoviesRepository, v 0.1 01/12/22 11.16 by Abim (Moch Arya Bima A)
  */
 interface ApiMoviesRepository {
+
+    fun getNowPlayingMovies(
+        refresh: Boolean
+    ): Observable<List<Movie>>
+
+    fun getPopularMovies(
+        refresh: Boolean
+    ): Observable<List<Movie>>
+
+    fun getTopRatedMovies(
+        refresh: Boolean
+    ): Observable<List<Movie>>
+
+    fun getMovieDetail(
+        id: Int
+    ): Observable<Movie>
+
 }

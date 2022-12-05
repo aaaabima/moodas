@@ -20,7 +20,7 @@ data class MovieNowPlayingResponse(
 	val totalPages: Int? = null,
 
 	@field:SerializedName("results")
-	val results: List<ResultsItem?>? = null,
+	val results: List<ResultsItem>? = null,
 
 	@field:SerializedName("total_results")
 	val totalResults: Int? = null
@@ -53,7 +53,7 @@ data class ResultsItem(
 	val title: String? = null,
 
 	@field:SerializedName("genre_ids")
-	val genreIds: List<Int?>? = null,
+	val genreIds: List<Int>? = null,
 
 	@field:SerializedName("poster_path")
 	val posterPath: String? = null,
@@ -65,7 +65,7 @@ data class ResultsItem(
 	val releaseDate: String? = null,
 
 	@field:SerializedName("popularity")
-	val popularity: Any? = null,
+	val popularity: Int? = null,
 
 	@field:SerializedName("vote_average")
 	val voteAverage: Any? = null,
