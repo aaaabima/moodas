@@ -6,10 +6,23 @@
 
 package com.aaaabima.data.apimovies.repository.source
 
+import com.aaaabima.data.apimovies.model.MovieEntity
+import io.reactivex.Observable
+
 /**
  * @author Abim (Moch Arya Bima A) (i-arya.agfian@dana.id)
  * @version ApiMoviesEntityData, v 0.1 01/12/22 14.28 by Abim (Moch Arya Bima A)
  */
-data class ApiMoviesEntityData(
-    val id: Int?
-)
+interface ApiMoviesEntityData {
+
+    fun getNowPlayingMovies(apiKey: String): Observable<List<MovieEntity>>
+
+    fun getPopularMovies(apiKey: String): Observable<List<MovieEntity>>
+
+    fun getTopRatedMovies(apiKey: String): Observable<List<MovieEntity>>
+
+    fun getMovieDetail(
+        apiKey: String,
+        id: Int
+    ): Observable<MovieEntity>
+}

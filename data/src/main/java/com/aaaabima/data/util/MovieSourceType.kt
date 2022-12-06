@@ -11,5 +11,6 @@ package com.aaaabima.data.util
  * @version MovieSourceType, v 0.1 05/12/22 11.44 by Abim (Moch Arya Bima A)
  */
 enum class MovieSourceType {
+
     NOW_PLAYING, TOP_RATED, POPULAR
 }
