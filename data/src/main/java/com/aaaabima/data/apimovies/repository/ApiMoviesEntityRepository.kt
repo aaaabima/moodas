@@ -39,7 +39,7 @@ class ApiMoviesEntityRepository @Inject constructor(
     }
 
     override fun getMovieDetail(apiKey: String, id: Int): Observable<Movie> {
-        TODO("Not yet implemented")
+        return getMovieDetailFromRemote(apiKey, id)
     }
 
     private fun getNowPlayingMoviesFromRemote(
