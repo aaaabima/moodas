@@ -9,7 +9,6 @@ package com.aaaabima.moodas.util
 import android.content.Context
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
@@ -46,10 +45,10 @@ fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable
         .into(this)
 }
 
-@BindingAdapter("android:imageUrl")
-fun loadImage(view: ImageView, url: String?) {
-    view.loadImage(
-        url,
-        getProgressDrawable(view.context)
-    )
-}
+//@BindingAdapter("android:imageUrl")
+//fun loadImage(view: ImageView, url: String?) {
+//    view.loadImage(
+//        url,
+//        getProgressDrawable(view.context)
+//    )
+//}

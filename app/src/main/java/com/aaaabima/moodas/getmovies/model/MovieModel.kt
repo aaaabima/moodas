@@ -4,13 +4,13 @@
  * Copyright (c) 2017-2022 All Rights Reserved.
  */
 
-package com.aaaabima.domain.apimovies.model
+package com.aaaabima.moodas.getmovies.model
 
 /**
  * @author Abim (Moch Arya Bima A) (i-arya.agfian@dana.id)
- * @version Movie, v 0.1 05/12/22 08.31 by Abim (Moch Arya Bima A)
+ * @version MovieModel, v 0.1 07/12/22 10.57 by Abim (Moch Arya Bima A)
  */
-data class Movie(
+data class MovieModel(
     val id: Int,
     val original_title: String,
     val overview: String,

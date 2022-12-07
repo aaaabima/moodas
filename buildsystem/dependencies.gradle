@@ -2,8 +2,8 @@ ext {
     // Android
     applicationId = "com.aaaabima.moodas"
     minSdkVersion = 21
-    targetSdkVersion = 32
-    compileSdkVersion = 32
+    targetSdkVersion = 31
+    compileSdkVersion = 31
     versionCode = 1
     versionName = "1.0"
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -21,13 +21,13 @@ ext {
     swipeRefreshLayoutVersion = '1.1.0'
     retrofitVersion = '2.9.0'
     okHttpVersion = '4.6.0'
-    daggerVersion = '2.41'
+    daggerVersion = '2.44.2'
     rxJavaVersion = '2.2.19'
     rxAndroidVersion = '2.1.1'
     mockitoVersion = '4.3.1'
     powerMockVersion = '2.0.9'
     javaxInjectVersion = '1'
-    roomVersion = '2.3.0'
+    roomVersion = '2.4.0'
     timberVersion = '4.7.1'
     mmkvVersion = '1.2.12'
     arrowVersion = '1.0.0'

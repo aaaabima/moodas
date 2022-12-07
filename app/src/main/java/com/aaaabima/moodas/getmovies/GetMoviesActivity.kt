@@ -6,9 +6,16 @@
 
 package com.aaaabima.moodas.getmovies
 
-/**
- * @author Abim (Moch Arya Bima A) (i-arya.agfian@dana.id)
- * @version GetMoviesActivity, v 0.1 06/12/22 15.41 by Abim (Moch Arya Bima A)
- */
-class GetMoviesActivity {
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.aaaabima.moodas.databinding.ActivityGetMoviesBinding
+
+class GetMoviesActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityGetMoviesBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityGetMoviesBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
 }

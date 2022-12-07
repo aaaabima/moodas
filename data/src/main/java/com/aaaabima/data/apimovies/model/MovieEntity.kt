@@ -15,7 +15,7 @@ data class MovieEntity(
     val original_title: String?,
     val overview: String?,
     val poster_path: String?,
-    val genres: List<Int>?,
+    val genres: List<String>?,
     val release_date: String?,
     val popularity: Int?,
     val runtime: Int?,

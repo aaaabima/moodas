@@ -23,6 +23,7 @@ class GetNowPlayingMovies @Inject constructor(
 
     override fun buildUseCase(params: Params): Observable<List<Movie>> {
         return apiMoviesRepository.getNowPlayingMovies(
+            params.getNowPlayingMoviesRequest.apiKey,
             params.getNowPlayingMoviesRequest.refresh
         )
     }

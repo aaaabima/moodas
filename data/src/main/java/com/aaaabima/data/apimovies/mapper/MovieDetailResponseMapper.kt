@@ -16,9 +16,9 @@ import com.aaaabima.domain.apimovies.model.Movie
  * @version MovieDetailResponseMapper, v 0.1 06/12/22 14.29 by Abim (Moch Arya Bima A)
  */
 fun MovieDetailResponse.toDomain(): Movie {
-    val genreIds = mutableListOf<Int>()
+    val genreIds = mutableListOf<String>()
     this.genres?.map { it ->
-        genreIds.add(it?.id?: 0)
+        genreIds.add(it?.name.orEmpty())
     }
 
     return Movie(
@@ -34,9 +34,9 @@ fun MovieDetailResponse.toDomain(): Movie {
 }
 
 fun MovieDetailResponse.toEntity(): MovieEntity {
-    val genreIds = mutableListOf<Int>()
+    val genreIds = mutableListOf<String>()
     this.genres?.map { it ->
-        genreIds.add(it?.id?: 0)
+        genreIds.add(it?.name.orEmpty())
     }
 
     return MovieEntity(
