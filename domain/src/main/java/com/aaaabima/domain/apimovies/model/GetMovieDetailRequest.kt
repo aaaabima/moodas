@@ -10,4 +10,4 @@ package com.aaaabima.domain.apimovies.model
  * @author Abim (Moch Arya Bima A) (i-arya.agfian@dana.id)
  * @version GetMovieDetailRequest, v 0.1 05/12/22 08.32 by Abim (Moch Arya Bima A)
  */
-data class GetMovieDetailRequest(val apiKey: String, val id: Int)
+data class GetMovieDetailRequest(val id: Int, val apiKey: String)

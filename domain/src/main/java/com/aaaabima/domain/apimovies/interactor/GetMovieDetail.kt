@@ -23,8 +23,8 @@ class GetMovieDetail @Inject constructor(
 
     override fun buildUseCase(params: Params): Observable<Movie> {
         return apiMoviesRepository.getMovieDetail(
+            params.getMovieDetailRequest.id,
             params.getMovieDetailRequest.apiKey,
-            params.getMovieDetailRequest.id
         )
     }
 

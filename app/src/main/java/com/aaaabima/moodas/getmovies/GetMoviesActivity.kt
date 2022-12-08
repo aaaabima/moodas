@@ -94,12 +94,12 @@ class GetMoviesActivity : BaseBindingActivity<ActivityGetMoviesBinding>() {
         object : BaseRecyclerAdapter.AdapterOnClick {
             override fun onRecyclerItemClicked(extra: String) {
                 toast("Clicked with extra $extra")
-//                startActivity(
-//                    MovieDetailActivity.createIntent(
-//                        this@GetMoviesActivity,
-//                        extra
-//                    )
-//                )
+                startActivity(
+                    MovieDetailActivity.createIntent(
+                        this@GetMoviesActivity,
+                        extra.toInt()
+                    )
+                )
             }
         }
 

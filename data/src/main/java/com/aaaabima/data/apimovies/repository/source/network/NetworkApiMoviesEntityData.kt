@@ -45,8 +45,8 @@ class NetworkApiMoviesEntityData @Inject constructor(
         }
     }
 
-    override fun getMovieDetail(apiKey: String, id: Int): Observable<MovieEntity> {
-        return movieAPI.getMovieDetail(apiKey, id).map { response ->
+    override fun getMovieDetail(id: Int, apiKey: String): Observable<MovieEntity> {
+        return movieAPI.getMovieDetail(id, apiKey).map { response ->
             response.toEntity()
         }
     }

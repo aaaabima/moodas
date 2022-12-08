@@ -32,7 +32,7 @@ data class MovieDetailResponse(
     val genres: List<GenresItem?>? = null,
 
     @field:SerializedName("popularity")
-    val popularity: Int? = null,
+    val popularity: Number? = null,
 
     @field:SerializedName("production_countries")
     val productionCountries: List<ProductionCountriesItem?>? = null,
