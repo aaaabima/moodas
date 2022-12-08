@@ -53,7 +53,7 @@ data class ResultsItem(
 	val title: String? = null,
 
 	@field:SerializedName("genre_ids")
-	val genreIds: List<Int>? = null,
+	val genreIds: List<String>? = null,
 
 	@field:SerializedName("poster_path")
 	val posterPath: String? = null,
@@ -65,7 +65,7 @@ data class ResultsItem(
 	val releaseDate: String? = null,
 
 	@field:SerializedName("popularity")
-	val popularity: Int? = null,
+	val popularity: Number? = null,
 
 	@field:SerializedName("vote_average")
 	val voteAverage: Any? = null,

@@ -11,7 +11,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.aaaabima.moodas.R
 import com.aaaabima.moodas.base.BaseRecyclerAdapter
+import com.aaaabima.moodas.databinding.ItemMovieBinding
 import com.aaaabima.moodas.getmovies.model.MovieModel
+import com.bumptech.glide.Glide
 import javax.inject.Inject
 
 /**
@@ -21,6 +23,7 @@ import javax.inject.Inject
 class GetMoviesAdapter @Inject constructor(
     context: Context
 ): BaseRecyclerAdapter<MovieModel, GetMoviesAdapter.ViewHolder>(context) {
+
     override fun getResLayout(type: Int): Int = R.layout.item_movie
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,10 +31,15 @@ class GetMoviesAdapter @Inject constructor(
         return ViewHolder(binding)
     }
 
-    inner class ViewHolder(itemView: ItemMovieBinding) : BaseViewHolder(itemView) {
+    inner class ViewHolder(var binding: ItemMovieBinding) : BaseViewHolder(binding) {
 
         override fun onBind(model: MovieModel) {
-            view.user = model
+            val imageUrl = "https://image.tmdb.org/t/p/original${model.poster_path}"
+            Glide.with(context!!).load(imageUrl).into(binding.ivPoster)
+            binding.tvTitle.text = model.original_title
+            binding.cvItemMovie.setOnClickListener {
+                getCallback()?.onRecyclerItemClicked(model.id.toString())
+            }
 //            model.username?.let { username ->
 //                view.cvItemUser.setOnClickListener {
 //                    getCallback()?.onRecyclerItemClicked(username)

@@ -9,23 +9,31 @@ package com.aaaabima.moodas.base
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewbinding.ViewBinding
 import com.aaaabima.moodas.MoodasApplication
 
 /**
  * @author Abim (Moch Arya Bima A) (i-arya.agfian@dana.id)
  * @version BaseBindingActivity, v 0.1 06/12/22 15.35 by Abim (Moch Arya Bima A)
  */
-abstract class BaseBindingActivity: AppCompatActivity() {
+abstract class BaseBindingActivity<T: ViewBinding> : AppCompatActivity() {
+
     @LayoutRes
     protected abstract fun contentView(): Int
     protected abstract fun setupData(savedInstanceState: Bundle?)
     protected abstract fun setupView()
+    protected lateinit var binding: T
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = getViewBinding()
+        setContentView(binding.root)
         setupData(savedInstanceState)
         setupView()
     }
 
-    protected fun getApplicationComponent() = (application as MoodasApplication).getApplicationComponent()
+    abstract fun getViewBinding(): T
+
+    protected fun getApplicationComponent() =
+        (application as MoodasApplication).getApplicationComponent()
 }

@@ -16,7 +16,7 @@ import com.aaaabima.moodas.getmovies.model.MovieModel
  */
 interface GetMoviesContract {
     interface Presenter: BasePresenter {
-        fun getNowPlayingMovies(apiKey: String)
+        fun getNowPlayingMovies(apiKey: String, refresh: Boolean)
     }
 
     interface View: BaseView {

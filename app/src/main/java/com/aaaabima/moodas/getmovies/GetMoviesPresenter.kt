@@ -7,6 +7,8 @@
 package com.aaaabima.moodas.getmovies
 
 import com.aaaabima.domain.apimovies.interactor.GetNowPlayingMovies
+import com.aaaabima.domain.apimovies.model.GetNowPlayingMoviesRequest
+import com.aaaabima.moodas.getmovies.mapper.toModel
 import javax.inject.Inject
 
 /**
@@ -18,19 +20,31 @@ class GetMoviesPresenter @Inject constructor(
     private val getNowPlayingMovies: GetNowPlayingMovies
 ): GetMoviesContract.Presenter {
 
-    override fun getNowPlayingMovies(apiKey: String) {
-        TODO("Not yet implemented")
+    override fun getNowPlayingMovies(apiKey: String, refresh: Boolean) {
+        view.showProgress()
+        getNowPlayingMovies.execute(
+            GetNowPlayingMovies.Params.createGetMoviesRequest(
+                GetNowPlayingMoviesRequest(apiKey, refresh)
+            ), onSuccess = { movieResult ->
+                view.setMovieResult(movieResult.map { it.toModel() })
+                view.dismissProgress()
+            },
+            onError = {
+                view.onError(it.message)
+                view.dismissProgress()
+            }
+        )
     }
 
     override fun resume() {
-        TODO("Not yet implemented")
+        // no implementation
     }
 
     override fun pause() {
-        TODO("Not yet implemented")
+        // no implementation
     }
 
     override fun destroy() {
-        TODO("Not yet implemented")
+        getNowPlayingMovies.dispose()
     }
 }

@@ -26,6 +26,7 @@ class CustomRvMargin(
         val LINEAR_VERTICAL = "linear_vertical"
         val LINEAR_VERTICAL_REVERSED = "linear_vertical_reversed"
         val GRID_2 = "grid_2"
+        val GRID_1 = "grid_1"
     }
 
     override fun getItemOffsets(
@@ -81,6 +82,15 @@ class CustomRvMargin(
                         left = customMargin / 2
                         right = customMargin
                     }
+                    bottom = customMargin
+                }
+            }
+
+            GRID_1 -> {
+                with(outRect) {
+                    top = customMargin
+                    left = customMargin
+                    right = customMargin
                     bottom = customMargin
                 }
             }
