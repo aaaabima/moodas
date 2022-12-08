@@ -1,0 +1,54 @@
+/*
+ * DANA.id
+ * PT. Espay Debit Indonesia Koe.
+ * Copyright (c) 2017-2022 All Rights Reserved.
+ */
+
+package com.aaaabima.moodas.util
+
+import android.content.Context
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+
+/**
+ * @author Abim (Moch Arya Bima A) (i-arya.agfian@dana.id)
+ */
+fun Context.toast(text: String) {
+    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+}
+
+private fun getProgressDrawable(context: Context): CircularProgressDrawable {
+    return CircularProgressDrawable(context).apply {
+        strokeWidth = 10f
+        centerRadius = 50f
+        start()
+    }
+}
+
+fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable) {
+    val options = RequestOptions()
+        .placeholder(progressDrawable)
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .priority(Priority.HIGH)
+        .dontAnimate()
+        .dontTransform()
+
+    Glide.with(context)
+        .setDefaultRequestOptions(options)
+        .load(uri)
+        //.error(ContextCompat.getDrawable(context, R.drawable.error_no_picture))
+        .into(this)
+}
+
+//@BindingAdapter("android:imageUrl")
+//fun loadImage(view: ImageView, url: String?) {
+//    view.loadImage(
+//        url,
+//        getProgressDrawable(view.context)
+//    )
+//}
