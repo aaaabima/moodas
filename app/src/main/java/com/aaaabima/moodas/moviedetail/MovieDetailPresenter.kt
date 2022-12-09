@@ -18,7 +18,7 @@ import javax.inject.Inject
 class MovieDetailPresenter @Inject constructor(
     private val view: MovieDetailContract.View,
     private val getMovieDetail: GetMovieDetail
-): MovieDetailContract.Presenter {
+) : MovieDetailContract.Presenter {
 
     override fun getMovieDetail(id: Int, apiKey: String) {
         view.showProgress()
@@ -47,4 +47,18 @@ class MovieDetailPresenter @Inject constructor(
         getMovieDetail.dispose()
     }
 
+    fun formatDisplayText(prefix: String, text: String): String {
+        return "$prefix : $text"
+    }
+
+    fun formatGenre(genres: List<String>): String {
+        var text = ""
+        for (genre in genres)
+            text += "| $genre "
+        return "$text |"
+    }
+
+    fun formatRuntime(runtime: Int): String {
+        return "${runtime / 60} hr ${runtime % 60} minute"
+    }
 }

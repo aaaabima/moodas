@@ -20,11 +20,11 @@ import com.aaaabima.moodas.getmovies.adapter.GetMoviesAdapter
 import com.aaaabima.moodas.getmovies.model.MovieModel
 import com.aaaabima.moodas.moviedetail.MovieDetailActivity
 import com.aaaabima.moodas.util.CustomRvMargin
-import com.aaaabima.moodas.util.toast
 import timber.log.Timber
 import javax.inject.Inject
 
 class GetMoviesActivity : BaseBindingActivity<ActivityGetMoviesBinding>() {
+
     @Inject
     lateinit var rvAdapter: GetMoviesAdapter
 
@@ -35,7 +35,9 @@ class GetMoviesActivity : BaseBindingActivity<ActivityGetMoviesBinding>() {
 
     override fun setupData(savedInstanceState: Bundle?) {}
 
-    override fun getViewBinding(): ActivityGetMoviesBinding { return ActivityGetMoviesBinding.inflate(layoutInflater) }
+    override fun getViewBinding(): ActivityGetMoviesBinding {
+        return ActivityGetMoviesBinding.inflate(layoutInflater)
+    }
 
     override fun setupView() {
         getViewBinding()
@@ -52,7 +54,7 @@ class GetMoviesActivity : BaseBindingActivity<ActivityGetMoviesBinding>() {
             .inject(this)
     }
 
-    private fun getGetMoviesModule() = GetMoviesModule(object: GetMoviesContract.View {
+    private fun getGetMoviesModule() = GetMoviesModule(object : GetMoviesContract.View {
         override fun setMovieResult(movies: List<MovieModel>) {
             if (movies.isEmpty()) {
                 binding.tvNoMovie.isVisible = true
@@ -93,7 +95,6 @@ class GetMoviesActivity : BaseBindingActivity<ActivityGetMoviesBinding>() {
     private fun provideOnItemClickListener() =
         object : BaseRecyclerAdapter.AdapterOnClick {
             override fun onRecyclerItemClicked(extra: String) {
-                toast("Clicked with extra $extra")
                 startActivity(
                     MovieDetailActivity.createIntent(
                         this@GetMoviesActivity,

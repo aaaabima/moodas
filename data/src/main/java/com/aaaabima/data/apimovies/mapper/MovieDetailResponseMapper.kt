@@ -8,7 +8,6 @@ package com.aaaabima.data.apimovies.mapper
 
 import com.aaaabima.data.apimovies.model.MovieEntity
 import com.aaaabima.data.apimovies.repository.source.network.response.MovieDetailResponse
-import com.aaaabima.data.apimovies.repository.source.network.response.ResultsItem
 import com.aaaabima.domain.apimovies.model.Movie
 
 /**
@@ -28,8 +27,8 @@ fun MovieDetailResponse.toDomain(): Movie {
         this.posterPath.toString(),
         genreIds,
         this.releaseDate.orEmpty(),
-        this.popularity?: 0,
-        0
+        this.popularity ?: 0,
+        this.runtime ?: 0
     )
 }
 
@@ -47,6 +46,6 @@ fun MovieDetailResponse.toEntity(): MovieEntity {
         genreIds,
         this.releaseDate,
         this.popularity,
-        0
+        this.runtime ?: 0
     )
 }

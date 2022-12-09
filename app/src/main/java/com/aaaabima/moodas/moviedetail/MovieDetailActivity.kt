@@ -16,6 +16,7 @@ import com.aaaabima.moodas.databinding.ActivityMovieDetailBinding
 import com.aaaabima.moodas.di.component.DaggerMovieDetailComponent
 import com.aaaabima.moodas.di.module.MovieDetailModule
 import com.aaaabima.moodas.getmovies.model.MovieModel
+import com.bumptech.glide.Glide
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -33,8 +34,6 @@ class MovieDetailActivity : BaseBindingActivity<ActivityMovieDetailBinding>() {
     }
 
     private var id = 0
-
-    private lateinit var movieDetail: MovieModel
 
     @Inject
     lateinit var presenter: MovieDetailPresenter
@@ -69,8 +68,24 @@ class MovieDetailActivity : BaseBindingActivity<ActivityMovieDetailBinding>() {
 
     private fun getMovieDetailModule() = MovieDetailModule(object : MovieDetailContract.View {
         override fun setMovieResult(movie: MovieModel) {
-            movieDetail = movie
-            binding.dummy.text = movieDetail.id.toString()
+            movie.let {
+                val imageUrl = "https://image.tmdb.org/t/p/original${it.poster_path}"
+                binding.apply {
+                    Glide.with(this@MovieDetailActivity)
+                        .load(imageUrl)
+                        .into(ivPoster)
+                    tvTitle.text = presenter.formatDisplayText("Title", it.original_title)
+                    tvOverview.text = presenter.formatDisplayText("Overview", it.overview)
+                    tvReleaseDate.text =
+                        presenter.formatDisplayText("Release Date", it.release_date)
+                    tvGenre.text =
+                        presenter.formatDisplayText("Genre", presenter.formatGenre(it.genres))
+                    tvRuntime.text =
+                        presenter.formatDisplayText("Title", presenter.formatRuntime(it.runtime))
+                    tvPopularity.text =
+                        presenter.formatDisplayText("Popularity", it.popularity.toString())
+                }
+            }
         }
 
         override fun showProgress() {
