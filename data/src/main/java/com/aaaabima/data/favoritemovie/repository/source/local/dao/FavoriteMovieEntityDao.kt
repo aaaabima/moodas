@@ -11,9 +11,9 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.aaaabima.data.apimovies.model.MovieEntity
 import com.aaaabima.data.favoritemovie.model.FavoriteMovieEntity
 import com.aaaabima.data.network.Constant
+import com.aaaabima.domain.favoritemovie.model.FavoriteMovie
 import io.reactivex.Observable
 
 /**
@@ -27,11 +27,11 @@ interface FavoriteMovieEntityDao {
     fun getFavoriteMovies(): Observable<List<FavoriteMovieEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFavoriteMovie(movie: MovieEntity)
+    fun insertFavoriteMovie(movie: FavoriteMovieEntity)
 
     @Delete
-    fun deleteFavoriteMovie(movie: MovieEntity)
+    fun deleteFavoriteMovie(movie: FavoriteMovieEntity)
 
     @Query("SELECT EXISTS(SELECT * FROM ${Constant.Database.Table.MOVIE} WHERE id = :id)")
-    fun isFavoriteMovie(id: String): Boolean
+    fun isFavoriteMovie(id: String): Observable<Boolean>
 }

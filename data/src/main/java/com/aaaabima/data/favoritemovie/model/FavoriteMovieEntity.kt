@@ -18,28 +18,28 @@ import com.aaaabima.data.network.Constant
 @Entity(tableName = Constant.Database.Table.MOVIE)
 class FavoriteMovieEntity (
 
-    @field:ColumnInfo(name = "id")
+    @ColumnInfo(name = "id")
     @PrimaryKey
     var id: Int?,
 
-    @field:ColumnInfo(name = "original_title")
+    @ColumnInfo(defaultValue = "")
     var original_title: String?,
 
-    @field:ColumnInfo(name = "overview")
+    @ColumnInfo(defaultValue = "")
     var overview: String?,
 
-    @field:ColumnInfo(name = "poster_path")
+    @ColumnInfo(defaultValue = "")
     var poster_path: String?,
 
-    @field:ColumnInfo(name = "genres")
-    val genres: List<String>?,
+    @ColumnInfo(defaultValue = "")
+    val genres: String?,
 
-    @field:ColumnInfo(name = "release_date")
+    @ColumnInfo(defaultValue = "")
     val release_date: String?,
 
-    @field:ColumnInfo(name = "popularity")
-    val popularity: Number?,
+    @ColumnInfo(defaultValue = "0")
+    val popularity: Float?,
 
-    @field:ColumnInfo(name = "runtime")
+    @ColumnInfo(defaultValue = "0")
     val runtime: Int?,
     )

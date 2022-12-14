@@ -6,6 +6,7 @@
 
 package com.aaaabima.data.favoritemovie.repository.source.local
 
+import com.aaaabima.data.favoritemovie.mapper.toEntity
 import com.aaaabima.data.favoritemovie.model.FavoriteMovieEntity
 import com.aaaabima.data.favoritemovie.repository.source.FavoriteMovieEntityData
 import com.aaaabima.data.favoritemovie.repository.source.local.dao.FavoriteMovieEntityDao
@@ -25,15 +26,15 @@ class PersistenceFavoriteMovieEntityData @Inject constructor(
         return favoriteMovieEntityDao.getFavoriteMovies()
     }
 
-    override fun insertFavoriteMovie(movie: FavoriteMovie): Observable<Unit> {
-        return favoriteMovieEntityDao.insertFavoriteMovie(movie)
+    override fun insertFavoriteMovie(movie: FavoriteMovie){
+        return favoriteMovieEntityDao.insertFavoriteMovie(movie.toEntity())
     }
 
-    override fun deleteFavoriteMovie(movie: FavoriteMovie): Observable<Unit> {
-        TODO("Not yet implemented")
+    override fun deleteFavoriteMovie(movie: FavoriteMovie) {
+        return favoriteMovieEntityDao.deleteFavoriteMovie(movie.toEntity())
     }
 
     override fun isFavoriteMovie(id: String): Observable<Boolean> {
-        TODO("Not yet implemented")
+        return favoriteMovieEntityDao.isFavoriteMovie(id)
     }
 }

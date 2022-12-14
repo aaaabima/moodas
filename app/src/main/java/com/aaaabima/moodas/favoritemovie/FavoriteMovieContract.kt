@@ -8,6 +8,7 @@ package com.aaaabima.moodas.favoritemovie
 
 import com.aaaabima.moodas.base.BasePresenter
 import com.aaaabima.moodas.base.BaseView
+import com.aaaabima.moodas.favoritemovie.model.FavoriteMovieModel
 import com.aaaabima.moodas.getmovies.model.MovieModel
 
 
@@ -17,10 +18,16 @@ import com.aaaabima.moodas.getmovies.model.MovieModel
  */
 interface FavoriteMovieContract {
     interface Presenter: BasePresenter {
-        fun getFavoriteMovie(apiKey: String, refresh: Boolean)
+        fun getFavoriteMovies()
+
+        fun insertFavoriteMovie(movie: FavoriteMovieModel)
+
+        fun deleteFavoriteMovie(movie: FavoriteMovieModel)
+
+        fun isFavoriteMovie(id: String)
     }
 
     interface View: BaseView {
-        fun setMovieResult(movies: List<MovieModel>)
+        fun setFavoriteMovieResult(movies: List<FavoriteMovieModel>)
     }
 }

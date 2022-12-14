@@ -17,6 +17,7 @@ import com.aaaabima.domain.favoritemovie.model.FavoriteMovie
  * @author Abim (Moch Arya Bima A) (i-arya.agfian@dana.id)
  * @version FavoriteMovieMapper, v 0.1 12/14/2022 5:38 PM by Abim (Moch Arya Bima A)
  */
+
 fun FavoriteMovie.toEntity(): FavoriteMovieEntity {
     return FavoriteMovieEntity(
         this.id,
@@ -25,12 +26,12 @@ fun FavoriteMovie.toEntity(): FavoriteMovieEntity {
         this.poster_path,
         this.genres,
         this.release_date,
-        this.popularity,
+        this.popularity.toFloat(),
         this.runtime
     )
 }
 
-internal fun FavoriteMovieEntity.toDomain(): FavoriteMovie {
+fun FavoriteMovieEntity.toDomain(): FavoriteMovie {
     return FavoriteMovie(
         this.id!!,
         this.original_title.orEmpty(),

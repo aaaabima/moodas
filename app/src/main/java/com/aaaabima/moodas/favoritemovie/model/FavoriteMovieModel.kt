@@ -4,13 +4,13 @@
  * Copyright (c) 2017-2022 All Rights Reserved.
  */
 
-package com.aaaabima.domain.favoritemovie.model
+package com.aaaabima.moodas.favoritemovie.model
 
 /**
  * @author Abim (Moch Arya Bima A) (i-arya.agfian@dana.id)
- * @version FavoriteMovie, v 0.1 12/14/2022 5:48 PM by Abim (Moch Arya Bima A)
+ * @version FavoriteMovieModel, v 0.1 12/14/2022 10:56 PM by Abim (Moch Arya Bima A)
  */
-data class FavoriteMovie(
+data class FavoriteMovieModel(
     val id: Int,
     val original_title: String,
     val overview: String,
