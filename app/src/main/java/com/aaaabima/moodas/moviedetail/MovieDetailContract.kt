@@ -6,9 +6,32 @@
 
 package com.aaaabima.moodas.moviedetail
 
+import com.aaaabima.moodas.base.BasePresenter
+import com.aaaabima.moodas.base.BaseView
+import com.aaaabima.moodas.favoritemovie.model.FavoriteMovieModel
+import com.aaaabima.moodas.getmovies.model.MovieModel
+
 /**
  * @author Abim (Moch Arya Bima A) (i-arya.agfian@dana.id)
  * @version MovieDetailContract, v 0.1 06/12/22 15.38 by Abim (Moch Arya Bima A)
  */
-class MovieDetailContract {
+interface MovieDetailContract {
+
+    interface Presenter : BasePresenter {
+
+        fun getMovieDetail(id: Int, apiKey: String)
+
+        fun insertFavoriteMovie(movie: FavoriteMovieModel)
+
+        fun deleteFavoriteMovie(movie: FavoriteMovieModel)
+
+        fun isFavoriteMovie(id: String)
+    }
+
+    interface View : BaseView {
+
+        fun setMovieResult(movie: MovieModel)
+
+        fun setFavoriteState(isFavorite: Boolean)
+    }
 }

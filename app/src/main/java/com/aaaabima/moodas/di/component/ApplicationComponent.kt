@@ -7,8 +7,10 @@
 package com.aaaabima.moodas.di.component
 
 import android.content.Context
+import com.aaaabima.data.di.DatabaseModule
 import com.aaaabima.data.di.NetworkModule
 import com.aaaabima.domain.apimovies.repository.ApiMoviesRepository
+import com.aaaabima.domain.favoritemovie.repository.FavoriteMovieRepository
 import com.aaaabima.moodas.di.module.ApplicationModule
 import dagger.Component
 import javax.inject.Singleton
@@ -22,10 +24,12 @@ import javax.inject.Singleton
     modules = [
         ApplicationModule::class,
         NetworkModule::class,
+        DatabaseModule::class
     ]
 )
 interface ApplicationComponent {
 
     fun context(): Context
     fun apiMoviesRepository(): ApiMoviesRepository
+    fun favoriteMovieRepository(): FavoriteMovieRepository
 }

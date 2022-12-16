@@ -40,11 +40,6 @@ class GetMoviesAdapter @Inject constructor(
             binding.cvItemMovie.setOnClickListener {
                 getCallback()?.onRecyclerItemClicked(model.id.toString())
             }
-//            model.username?.let { username ->
-//                view.cvItemUser.setOnClickListener {
-//                    getCallback()?.onRecyclerItemClicked(username)
-//                }
-//            }
         }
     }
 }

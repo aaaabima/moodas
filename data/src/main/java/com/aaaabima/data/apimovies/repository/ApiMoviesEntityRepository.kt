@@ -38,8 +38,8 @@ class ApiMoviesEntityRepository @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override fun getMovieDetail(apiKey: String, id: Int): Observable<Movie> {
-        return getMovieDetailFromRemote(apiKey, id)
+    override fun getMovieDetail(id: Int, apiKey: String, ): Observable<Movie> {
+        return getMovieDetailFromRemote(id, apiKey)
     }
 
     private fun getNowPlayingMoviesFromRemote(
@@ -52,10 +52,10 @@ class ApiMoviesEntityRepository @Inject constructor(
     }
 
     private fun getMovieDetailFromRemote(
+        id: Int,
         apiKey: String,
-        id: Int
     ): Observable<Movie> {
-        return getRemoteRepository().getMovieDetail(apiKey, id)
+        return getRemoteRepository().getMovieDetail(id, apiKey)
             .map { movieResult ->
                 movieResult.toDomain()
             }
@@ -66,6 +66,5 @@ class ApiMoviesEntityRepository @Inject constructor(
             .map { it.toDomain() }
             .toList()
             .toObservable()
-
 
 }

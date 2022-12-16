@@ -31,8 +31,12 @@ interface ApiMoviesRepository {
     ): Observable<List<Movie>>
 
     fun getMovieDetail(
+        id: Int,
         apiKey: String,
-        id: Int
     ): Observable<Movie>
 
+//    fun getMovieTrailer(
+//        id: Int,
+//        apiKey: String,
+//    ): Observable<Movie>
 }

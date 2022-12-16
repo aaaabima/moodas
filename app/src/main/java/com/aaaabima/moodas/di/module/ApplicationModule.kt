@@ -9,7 +9,9 @@ package com.aaaabima.moodas.di.module
 import android.app.Application
 import android.content.Context
 import com.aaaabima.data.apimovies.repository.ApiMoviesEntityRepository
+import com.aaaabima.data.favoritemovie.repository.FavoriteMovieEntityRepository
 import com.aaaabima.domain.apimovies.repository.ApiMoviesRepository
+import com.aaaabima.domain.favoritemovie.repository.FavoriteMovieRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -34,4 +36,12 @@ class ApplicationModule(private val app: Application) {
     fun provideSearchUserRepository(
         apiMoviesEntityRepository: ApiMoviesEntityRepository
     ): ApiMoviesRepository =
-        apiMoviesEntityRepository}
+        apiMoviesEntityRepository
+
+    @Singleton
+    @Provides
+    fun provideFavoriteMovieRepository(
+        favoriteMovieEntityRepository: FavoriteMovieEntityRepository
+    ): FavoriteMovieRepository =
+        favoriteMovieEntityRepository
+}

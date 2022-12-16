@@ -7,6 +7,7 @@
 package com.aaaabima.moodas.getmovies.mapper
 
 import com.aaaabima.domain.apimovies.model.Movie
+import com.aaaabima.moodas.favoritemovie.model.FavoriteMovieModel
 import com.aaaabima.moodas.getmovies.model.MovieModel
 
 /**
@@ -30,6 +31,17 @@ fun MovieModel.toDomain() = Movie(
     overview = overview,
     poster_path = poster_path,
     genres = genres,
+    release_date = release_date,
+    popularity = popularity,
+    runtime = runtime
+)
+
+fun MovieModel.toFavoriteMovieModel() = FavoriteMovieModel(
+    id = id,
+    original_title = original_title,
+    overview = overview,
+    poster_path = poster_path,
+    genres = genres.toString(),
     release_date = release_date,
     popularity = popularity,
     runtime = runtime

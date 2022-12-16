@@ -18,7 +18,7 @@ import javax.inject.Inject
 class GetMoviesPresenter @Inject constructor(
     private val view: GetMoviesContract.View,
     private val getNowPlayingMovies: GetNowPlayingMovies
-): GetMoviesContract.Presenter {
+) : GetMoviesContract.Presenter {
 
     override fun getNowPlayingMovies(apiKey: String, refresh: Boolean) {
         view.showProgress()
@@ -28,8 +28,7 @@ class GetMoviesPresenter @Inject constructor(
             ), onSuccess = { movieResult ->
                 view.setMovieResult(movieResult.map { it.toModel() })
                 view.dismissProgress()
-            },
-            onError = {
+            }, onError = {
                 view.onError(it.message)
                 view.dismissProgress()
             }

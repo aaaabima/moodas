@@ -20,6 +20,7 @@ import dagger.Provides
 class GetMoviesModule(
     private val view: GetMoviesContract.View
 ) {
+
     @PerActivity
     @Provides
     fun provideGetMoviesView(): GetMoviesContract.View = view
