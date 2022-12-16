@@ -35,6 +35,7 @@ object Constant {
 
             private const val PREFIX = "movie"
             const val Detail = "$PREFIX/{param}"
+            const val Videos = "$PREFIX/{param}/videos"
         }
     }
 }

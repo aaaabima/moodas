@@ -1,3 +1,9 @@
+<!--
+  ~ DANA.id
+  ~ PT. Espay Debit Indonesia Koe.
+  ~ Copyright (c) 2017-2022 All Rights Reserved.
+  -->
+
 <resources>
     <string name="app_name">Moodas</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -5,4 +11,5 @@
     <string name="no_movies_available">No movies available</string>
     <string name="movie_title">Movie Title\nMovie Title</string>
     <string name="dummy_text">Dummy Text</string>
+    <string name="favorite_movie">Favorite Movie</string>
 </resources>

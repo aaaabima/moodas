@@ -7,6 +7,7 @@
 package com.aaaabima.data.apimovies.repository.source
 
 import com.aaaabima.data.apimovies.model.MovieEntity
+import com.aaaabima.data.apimovies.model.MovieTrailerEntity
 import io.reactivex.Observable
 
 /**
@@ -25,4 +26,9 @@ interface ApiMoviesEntityData {
         id: Int,
         apiKey: String,
     ): Observable<MovieEntity>
+
+    fun getMovieTrailer(
+        id: Int,
+        apiKey: String,
+    ): Observable<List<MovieTrailerEntity>>
 }

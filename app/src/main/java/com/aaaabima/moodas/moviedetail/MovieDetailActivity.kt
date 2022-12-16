@@ -9,6 +9,7 @@ package com.aaaabima.moodas.moviedetail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.aaaabima.moodas.BuildConfig
 import com.aaaabima.moodas.R
@@ -124,11 +125,11 @@ class MovieDetailActivity : BaseBindingActivity<ActivityMovieDetailBinding>() {
         }
 
         override fun showProgress() {
-            //binding.pbFavorite.visibility = View.VISIBLE
+            binding.pbFavorite.visibility = View.VISIBLE
         }
 
         override fun dismissProgress() {
-            //binding.pbFavorite.visibility = View.GONE
+            binding.pbFavorite.visibility = View.GONE
         }
 
         override fun onError(errorMessage: String?) {

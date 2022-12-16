@@ -22,7 +22,7 @@ import javax.inject.Inject
  */
 class GetMoviesAdapter @Inject constructor(
     context: Context
-): BaseRecyclerAdapter<MovieModel, GetMoviesAdapter.ViewHolder>(context) {
+) : BaseRecyclerAdapter<MovieModel, GetMoviesAdapter.ViewHolder>(context) {
 
     override fun getResLayout(type: Int): Int = R.layout.item_movie
 

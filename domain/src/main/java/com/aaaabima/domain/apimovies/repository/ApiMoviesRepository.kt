@@ -7,6 +7,7 @@
 package com.aaaabima.domain.apimovies.repository
 
 import com.aaaabima.domain.apimovies.model.Movie
+import com.aaaabima.domain.apimovies.model.MovieTrailer
 import io.reactivex.Observable
 
 /**
@@ -35,8 +36,8 @@ interface ApiMoviesRepository {
         apiKey: String,
     ): Observable<Movie>
 
-//    fun getMovieTrailer(
-//        id: Int,
-//        apiKey: String,
-//    ): Observable<Movie>
+    fun getMovieTrailer(
+        id: Int,
+        apiKey: String,
+    ): Observable<List<MovieTrailer>>
 }

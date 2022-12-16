@@ -15,11 +15,14 @@ import com.aaaabima.moodas.getmovies.model.MovieModel
  * @version GetMoviesContract, v 0.1 06/12/22 15.41 by Abim (Moch Arya Bima A)
  */
 interface GetMoviesContract {
-    interface Presenter: BasePresenter {
+
+    interface Presenter : BasePresenter {
+
         fun getNowPlayingMovies(apiKey: String, refresh: Boolean)
     }
 
-    interface View: BaseView {
+    interface View : BaseView {
+
         fun setMovieResult(movies: List<MovieModel>)
     }
 }
