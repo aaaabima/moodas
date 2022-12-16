@@ -33,12 +33,12 @@ class FavoriteMovieEntityRepository @Inject constructor(
             .flatMap { it.mapListToDomain() }
     }
 
-    override fun insertFavoriteMovie(movie: FavoriteMovie): Observable<Unit> {
-        return Observable.just(getLocalRepository().insertFavoriteMovie(movie))
+    override fun insertFavoriteMovie(movie: FavoriteMovie): Observable<Int> {
+        return getLocalRepository().insertFavoriteMovie(movie)
     }
 
-    override fun deleteFavoriteMovie(movie: FavoriteMovie): Observable<Unit> {
-        return Observable.just(getLocalRepository().insertFavoriteMovie(movie))
+    override fun deleteFavoriteMovie(movie: FavoriteMovie): Observable<Int> {
+        return getLocalRepository().deleteFavoriteMovie(movie)
     }
 
     override fun isFavoriteMovie(id: String): Observable<Boolean> {

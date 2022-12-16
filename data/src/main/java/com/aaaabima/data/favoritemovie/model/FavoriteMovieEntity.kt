@@ -16,7 +16,7 @@ import com.aaaabima.data.network.Constant
  * @version FavoriteMovieEntity, v 0.1 12/14/2022 3:05 PM by Abim (Moch Arya Bima A
  */
 @Entity(tableName = Constant.Database.Table.MOVIE)
-class FavoriteMovieEntity (
+data class FavoriteMovieEntity (
 
     @ColumnInfo(name = "id")
     @PrimaryKey

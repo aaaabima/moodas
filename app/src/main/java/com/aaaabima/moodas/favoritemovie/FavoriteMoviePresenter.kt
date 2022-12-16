@@ -6,11 +6,16 @@
 
 package com.aaaabima.moodas.favoritemovie
 
+import com.aaaabima.domain.apimovies.interactor.GetMovieDetail
+import com.aaaabima.domain.apimovies.model.GetMovieDetailRequest
+import com.aaaabima.domain.base.NoParams
 import com.aaaabima.domain.favoritemovie.interactor.DeleteFavoriteMovie
 import com.aaaabima.domain.favoritemovie.interactor.GetFavoriteMovies
 import com.aaaabima.domain.favoritemovie.interactor.InsertFavoriteMovie
 import com.aaaabima.domain.favoritemovie.interactor.IsFavoriteMovie
+import com.aaaabima.moodas.favoritemovie.mapper.toModel
 import com.aaaabima.moodas.favoritemovie.model.FavoriteMovieModel
+import com.aaaabima.moodas.getmovies.mapper.toModel
 import javax.inject.Inject
 
 /**
@@ -20,25 +25,19 @@ import javax.inject.Inject
 class FavoriteMoviePresenter @Inject constructor(
     private val view: FavoriteMovieContract.View,
     private val getFavoriteMovies: GetFavoriteMovies,
-    private val insertFavoriteMovie: InsertFavoriteMovie,
-    private val deleteFavoriteMovie: DeleteFavoriteMovie,
-    private val isFavoriteMovie: IsFavoriteMovie
-): FavoriteMovieContract.Presenter {
+) : FavoriteMovieContract.Presenter {
 
     override fun getFavoriteMovies() {
-        TODO("Not yet implemented")
-    }
-
-    override fun insertFavoriteMovie(movie: FavoriteMovieModel) {
-        TODO("Not yet implemented")
-    }
-
-    override fun deleteFavoriteMovie(movie: FavoriteMovieModel) {
-        TODO("Not yet implemented")
-    }
-
-    override fun isFavoriteMovie(id: String) {
-        TODO("Not yet implemented")
+        view.showProgress()
+        getFavoriteMovies.execute(
+            NoParams, onSuccess = { movie ->
+                view.setFavoriteMovieResult(movie.map { it.toModel() })
+                view.dismissProgress()
+            }, onError = {
+                view.onError(it.message)
+                view.dismissProgress()
+            }
+        )
     }
 
     override fun resume() {
@@ -51,8 +50,5 @@ class FavoriteMoviePresenter @Inject constructor(
 
     override fun destroy() {
         getFavoriteMovies.dispose()
-        insertFavoriteMovie.dispose()
-        deleteFavoriteMovie.dispose()
-        isFavoriteMovie.dispose()
     }
 }

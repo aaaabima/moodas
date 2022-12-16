@@ -18,9 +18,9 @@ interface FavoriteMovieEntityData {
 
     fun getFavoriteMovies(): Observable<List<FavoriteMovieEntity>>
 
-    fun insertFavoriteMovie(movie: FavoriteMovie)
+    fun insertFavoriteMovie(movie: FavoriteMovie): Observable<Int>
 
-    fun deleteFavoriteMovie(movie: FavoriteMovie)
+    fun deleteFavoriteMovie(movie: FavoriteMovie): Observable<Int>
 
     fun isFavoriteMovie(id: String): Observable<Boolean>
 }

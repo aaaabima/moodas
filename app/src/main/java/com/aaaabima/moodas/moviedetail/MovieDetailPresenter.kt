@@ -8,7 +8,16 @@ package com.aaaabima.moodas.moviedetail
 
 import com.aaaabima.domain.apimovies.interactor.GetMovieDetail
 import com.aaaabima.domain.apimovies.model.GetMovieDetailRequest
+import com.aaaabima.domain.favoritemovie.interactor.DeleteFavoriteMovie
+import com.aaaabima.domain.favoritemovie.interactor.InsertFavoriteMovie
+import com.aaaabima.domain.favoritemovie.interactor.IsFavoriteMovie
+import com.aaaabima.domain.favoritemovie.model.DeleteFavoriteMovieRequest
+import com.aaaabima.domain.favoritemovie.model.InsertFavoriteMovieRequest
+import com.aaaabima.domain.favoritemovie.model.IsFavoriteMovieRequest
+import com.aaaabima.moodas.favoritemovie.mapper.toDomain
+import com.aaaabima.moodas.favoritemovie.model.FavoriteMovieModel
 import com.aaaabima.moodas.getmovies.mapper.toModel
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -17,7 +26,10 @@ import javax.inject.Inject
  */
 class MovieDetailPresenter @Inject constructor(
     private val view: MovieDetailContract.View,
-    private val getMovieDetail: GetMovieDetail
+    private val getMovieDetail: GetMovieDetail,
+    private val insertFavoriteMovie: InsertFavoriteMovie,
+    private val deleteFavoriteMovie: DeleteFavoriteMovie,
+    private val isFavoriteMovie: IsFavoriteMovie,
 ) : MovieDetailContract.Presenter {
 
     override fun getMovieDetail(id: Int, apiKey: String) {
@@ -28,6 +40,50 @@ class MovieDetailPresenter @Inject constructor(
             ), onSuccess = { movie ->
                 view.setMovieResult(movie.toModel())
                 view.dismissProgress()
+            }, onError = {
+                view.onError(it.message)
+                view.dismissProgress()
+            }
+        )
+    }
+
+    override fun insertFavoriteMovie(movie: FavoriteMovieModel) {
+        view.showProgress()
+        insertFavoriteMovie.execute(
+            InsertFavoriteMovie.Params.createInsertFavoriteMovieRequest(
+                InsertFavoriteMovieRequest(movie.toDomain())
+            ), onSuccess = {
+                view.dismissProgress()
+            }, onError = {
+                view.onError(it.message)
+                view.dismissProgress()
+            }
+        )
+    }
+
+    override fun deleteFavoriteMovie(movie: FavoriteMovieModel) {
+        view.showProgress()
+        deleteFavoriteMovie.execute(
+            DeleteFavoriteMovie.Params.createDeleteFavoriteMovieRequest(
+                DeleteFavoriteMovieRequest(movie.toDomain())
+            ), onSuccess = {
+                view.dismissProgress()
+            }, onError = {
+                view.onError(it.message)
+                view.dismissProgress()
+            }
+        )
+    }
+
+    override fun isFavoriteMovie(id: String) {
+        view.showProgress()
+        isFavoriteMovie.execute(
+            IsFavoriteMovie.Params.createInsertFavoriteMovieRequest(
+                IsFavoriteMovieRequest(id)
+            ), onSuccess = { result ->
+                Timber.d("IsFavoriteMovieResult is $result")
+                view.dismissProgress()
+                view.setFavoriteState(result)
             }, onError = {
                 view.onError(it.message)
                 view.dismissProgress()

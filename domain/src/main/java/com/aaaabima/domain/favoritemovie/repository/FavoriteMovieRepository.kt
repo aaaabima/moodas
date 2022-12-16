@@ -16,9 +16,9 @@ import io.reactivex.Observable
 interface FavoriteMovieRepository {
     fun getFavoriteMovies(): Observable<List<FavoriteMovie>>
 
-    fun insertFavoriteMovie(movie: FavoriteMovie): Observable<Unit>
+    fun insertFavoriteMovie(movie: FavoriteMovie): Observable<Int>
 
-    fun deleteFavoriteMovie(movie: FavoriteMovie): Observable<Unit>
+    fun deleteFavoriteMovie(movie: FavoriteMovie): Observable<Int>
 
     fun isFavoriteMovie(id: String): Observable<Boolean>
 }

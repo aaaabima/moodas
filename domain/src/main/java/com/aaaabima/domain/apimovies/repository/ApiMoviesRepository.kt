@@ -35,4 +35,8 @@ interface ApiMoviesRepository {
         apiKey: String,
     ): Observable<Movie>
 
+//    fun getMovieTrailer(
+//        id: Int,
+//        apiKey: String,
+//    ): Observable<Movie>
 }

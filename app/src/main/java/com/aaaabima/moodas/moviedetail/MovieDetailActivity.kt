@@ -9,13 +9,16 @@ package com.aaaabima.moodas.moviedetail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.MutableLiveData
 import com.aaaabima.moodas.BuildConfig
 import com.aaaabima.moodas.R
 import com.aaaabima.moodas.base.BaseBindingActivity
 import com.aaaabima.moodas.databinding.ActivityMovieDetailBinding
 import com.aaaabima.moodas.di.component.DaggerMovieDetailComponent
 import com.aaaabima.moodas.di.module.MovieDetailModule
+import com.aaaabima.moodas.getmovies.mapper.toFavoriteMovieModel
 import com.aaaabima.moodas.getmovies.model.MovieModel
+import com.aaaabima.moodas.util.toast
 import com.bumptech.glide.Glide
 import timber.log.Timber
 import javax.inject.Inject
@@ -34,6 +37,8 @@ class MovieDetailActivity : BaseBindingActivity<ActivityMovieDetailBinding>() {
     }
 
     private var id = 0
+
+    private val isFavorited =  MutableLiveData<Boolean>()
 
     @Inject
     lateinit var presenter: MovieDetailPresenter
@@ -84,16 +89,46 @@ class MovieDetailActivity : BaseBindingActivity<ActivityMovieDetailBinding>() {
                         presenter.formatDisplayText("Title", presenter.formatRuntime(it.runtime))
                     tvPopularity.text =
                         presenter.formatDisplayText("Popularity", it.popularity.toString())
+                    presenter.isFavoriteMovie(it.id.toString())
+                    isFavorited.observe(this@MovieDetailActivity) { favorite ->
+                        if (favorite) {
+                            Glide.with(this@MovieDetailActivity)
+                                .load(R.drawable.ic_baseline_favorite_50)
+                                .into(binding.ivFavorite)
+                            binding.ivFavorite.setOnClickListener {
+                                presenter.deleteFavoriteMovie(
+                                    movie.toFavoriteMovieModel()
+                                )
+                                toast("Change to Unfavorite")
+                                isFavorited.value = false
+                            }
+                        } else if (!favorite) {
+                            Glide.with(this@MovieDetailActivity)
+                                .load(R.drawable.ic_twotone_unfavorite_50)
+                                .into(binding.ivFavorite)
+                            binding.ivFavorite.setOnClickListener {
+                                presenter.insertFavoriteMovie(
+                                    movie.toFavoriteMovieModel()
+                                )
+                                toast("Change to Favorite")
+                                isFavorited.value = true
+                            }
+                        }
+                    }
                 }
             }
         }
 
+        override fun setFavoriteState(isFavorite: Boolean) {
+            isFavorited.value = isFavorite
+        }
+
         override fun showProgress() {
-            //
+            //binding.pbFavorite.visibility = View.VISIBLE
         }
 
         override fun dismissProgress() {
-            //
+            //binding.pbFavorite.visibility = View.GONE
         }
 
         override fun onError(errorMessage: String?) {

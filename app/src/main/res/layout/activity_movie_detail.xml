@@ -17,8 +17,8 @@
         android:id="@+id/layout_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
         android:paddingStart="16dp"
+        android:paddingTop="16dp"
         android:paddingEnd="16dp">
 
         <TextView
@@ -84,13 +84,32 @@
             tools:text="@tools:sample/lorem" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_favorite"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:src="@drawable/ic_twotone_unfavorite_50"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_poster"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_poster"
             android:layout_width="210dp"
             android:layout_height="315dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars"/>
+            tools:src="@tools:sample/avatars" />
+
+<!--        <ProgressBar-->
+<!--            android:id="@+id/pb_favorite"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:visibility="gone"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

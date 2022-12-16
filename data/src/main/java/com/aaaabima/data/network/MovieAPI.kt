@@ -40,4 +40,6 @@ interface MovieAPI {
         @Path("param") id: Int,
         @Query("api_key") apiKey: String,
     ): Observable<MovieDetailResponse>
+
+
 }

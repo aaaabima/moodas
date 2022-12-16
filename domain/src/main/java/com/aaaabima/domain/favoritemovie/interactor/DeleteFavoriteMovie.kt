@@ -19,9 +19,9 @@ import javax.inject.Inject
  */
 class DeleteFavoriteMovie @Inject constructor(
     private val favoriteMovieRepository: FavoriteMovieRepository
-) : BaseUseCase<DeleteFavoriteMovie.Params, Unit>() {
+) : BaseUseCase<DeleteFavoriteMovie.Params, Int>() {
 
-    override fun buildUseCase(params: Params): Observable<Unit> {
+    override fun buildUseCase(params: Params): Observable<Int> {
         return favoriteMovieRepository.deleteFavoriteMovie(
             params.deleteFavoriteMovieRequest.movie
         )
