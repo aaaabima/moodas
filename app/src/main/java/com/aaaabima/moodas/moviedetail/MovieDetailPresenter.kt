@@ -7,7 +7,9 @@
 package com.aaaabima.moodas.moviedetail
 
 import com.aaaabima.domain.apimovies.interactor.GetMovieDetail
+import com.aaaabima.domain.apimovies.interactor.GetMovieTrailer
 import com.aaaabima.domain.apimovies.model.GetMovieDetailRequest
+import com.aaaabima.domain.apimovies.model.GetMovieTrailerRequest
 import com.aaaabima.domain.favoritemovie.interactor.DeleteFavoriteMovie
 import com.aaaabima.domain.favoritemovie.interactor.InsertFavoriteMovie
 import com.aaaabima.domain.favoritemovie.interactor.IsFavoriteMovie
@@ -17,7 +19,6 @@ import com.aaaabima.domain.favoritemovie.model.IsFavoriteMovieRequest
 import com.aaaabima.moodas.favoritemovie.mapper.toDomain
 import com.aaaabima.moodas.favoritemovie.model.FavoriteMovieModel
 import com.aaaabima.moodas.getmovies.mapper.toModel
-import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -27,6 +28,7 @@ import javax.inject.Inject
 class MovieDetailPresenter @Inject constructor(
     private val view: MovieDetailContract.View,
     private val getMovieDetail: GetMovieDetail,
+    private val getMovieTrailer: GetMovieTrailer,
     private val insertFavoriteMovie: InsertFavoriteMovie,
     private val deleteFavoriteMovie: DeleteFavoriteMovie,
     private val isFavoriteMovie: IsFavoriteMovie,
@@ -39,6 +41,21 @@ class MovieDetailPresenter @Inject constructor(
                 GetMovieDetailRequest(id, apiKey)
             ), onSuccess = { movie ->
                 view.setMovieResult(movie.toModel())
+                view.dismissProgress()
+            }, onError = {
+                view.onError(it.message)
+                view.dismissProgress()
+            }
+        )
+    }
+
+    override fun getMovieTrailer(id: Int, apiKey: String) {
+        view.showProgress()
+        getMovieTrailer.execute(
+            GetMovieTrailer.Params.createGetMovieTrailerRequest(
+                GetMovieTrailerRequest(id, apiKey)
+            ), onSuccess = { trailer ->
+                view.setMovieTrailerResult( trailer.map { it.toModel() })
                 view.dismissProgress()
             }, onError = {
                 view.onError(it.message)
@@ -81,7 +98,6 @@ class MovieDetailPresenter @Inject constructor(
             IsFavoriteMovie.Params.createInsertFavoriteMovieRequest(
                 IsFavoriteMovieRequest(id)
             ), onSuccess = { result ->
-                Timber.d("IsFavoriteMovieResult is $result")
                 view.dismissProgress()
                 view.setFavoriteState(result)
             }, onError = {

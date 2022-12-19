@@ -22,6 +22,7 @@ fun MovieTrailerItem.toDomain(): MovieTrailer {
         this.id!!,
         this.name.orEmpty(),
         this.key.orEmpty(),
+        this.type.orEmpty(),
         this.publishedAt!!,
         this.site.orEmpty(),
     )
@@ -32,6 +33,7 @@ fun MovieTrailerItem.toEntity(): MovieTrailerEntity {
         this.id,
         this.name,
         this.key,
+        this.type,
         this.publishedAt,
         this.site,
     )
@@ -42,6 +44,7 @@ internal fun MovieTrailerEntity.toDomain(): MovieTrailer {
         this.id!!,
         this.name.orEmpty(),
         this.key.orEmpty(),
+        this.type.orEmpty(),
         this.published_at!!,
         this.site.orEmpty(),
     )

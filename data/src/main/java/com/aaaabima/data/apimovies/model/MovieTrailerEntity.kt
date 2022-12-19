@@ -16,6 +16,7 @@ data class MovieTrailerEntity(
     val id: String?,
     val name: String?,
     val key: String?,
+    val type: String?,
     val published_at: Date?,
     val site: String?
 )

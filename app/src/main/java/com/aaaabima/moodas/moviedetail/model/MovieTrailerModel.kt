@@ -4,19 +4,19 @@
  * Copyright (c) 2017-2022 All Rights Reserved.
  */
 
-package com.aaaabima.domain.apimovies.model
+package com.aaaabima.moodas.moviedetail.model
 
 import java.util.*
 
 /**
  * @author Abim (Moch Arya Bima A) (i-arya.agfian@dana.id)
- * @version MovieTrailer, v 0.1 2022/12/16 17:51 by Abim (Moch Arya Bima A)
+ * @version MovieTrailerModel, v 0.1 19/12/22 11.37 by Abim (Moch Arya Bima A)
  */
-data class MovieTrailer (
+data class MovieTrailerModel (
     val id: String,
     val name: String,
     val key: String,
     val type: String,
     val published_at: Date,
     val site: String
-    )
+)

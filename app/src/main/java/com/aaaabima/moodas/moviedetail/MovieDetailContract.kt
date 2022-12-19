@@ -10,6 +10,7 @@ import com.aaaabima.moodas.base.BasePresenter
 import com.aaaabima.moodas.base.BaseView
 import com.aaaabima.moodas.favoritemovie.model.FavoriteMovieModel
 import com.aaaabima.moodas.getmovies.model.MovieModel
+import com.aaaabima.moodas.moviedetail.model.MovieTrailerModel
 
 /**
  * @author Abim (Moch Arya Bima A) (i-arya.agfian@dana.id)
@@ -21,6 +22,8 @@ interface MovieDetailContract {
 
         fun getMovieDetail(id: Int, apiKey: String)
 
+        fun getMovieTrailer(id: Int, apiKey: String)
+
         fun insertFavoriteMovie(movie: FavoriteMovieModel)
 
         fun deleteFavoriteMovie(movie: FavoriteMovieModel)
@@ -31,6 +34,8 @@ interface MovieDetailContract {
     interface View : BaseView {
 
         fun setMovieResult(movie: MovieModel)
+
+        fun setMovieTrailerResult(trailer: List<MovieTrailerModel>)
 
         fun setFavoriteState(isFavorite: Boolean)
     }

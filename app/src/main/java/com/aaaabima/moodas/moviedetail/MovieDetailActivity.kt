@@ -8,17 +8,24 @@ package com.aaaabima.moodas.moviedetail
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.aaaabima.moodas.BuildConfig
 import com.aaaabima.moodas.R
 import com.aaaabima.moodas.base.BaseBindingActivity
+import com.aaaabima.moodas.base.BaseRecyclerAdapter
 import com.aaaabima.moodas.databinding.ActivityMovieDetailBinding
 import com.aaaabima.moodas.di.component.DaggerMovieDetailComponent
 import com.aaaabima.moodas.di.module.MovieDetailModule
 import com.aaaabima.moodas.getmovies.mapper.toFavoriteMovieModel
 import com.aaaabima.moodas.getmovies.model.MovieModel
+import com.aaaabima.moodas.moviedetail.adapter.MovieTrailerAdapter
+import com.aaaabima.moodas.moviedetail.model.MovieTrailerModel
+import com.aaaabima.moodas.util.CustomRvMargin
 import com.aaaabima.moodas.util.toast
 import com.bumptech.glide.Glide
 import timber.log.Timber
@@ -39,7 +46,10 @@ class MovieDetailActivity : BaseBindingActivity<ActivityMovieDetailBinding>() {
 
     private var id = 0
 
-    private val isFavorited =  MutableLiveData<Boolean>()
+    private val isFavorited = MutableLiveData<Boolean>()
+
+    @Inject
+    lateinit var rvAdapter: MovieTrailerAdapter
 
     @Inject
     lateinit var presenter: MovieDetailPresenter
@@ -59,8 +69,20 @@ class MovieDetailActivity : BaseBindingActivity<ActivityMovieDetailBinding>() {
     override fun setupView() {
         getViewBinding()
         initInjector()
+        initRecyclerView()
         id.let {
             presenter.getMovieDetail(it, BuildConfig.API_KEY)
+            presenter.getMovieTrailer(it, BuildConfig.API_KEY)
+        }
+    }
+
+    private fun initRecyclerView() {
+        binding.rvItemTrailer.apply {
+            layoutManager = LinearLayoutManager(this@MovieDetailActivity)
+            adapter = rvAdapter.apply {
+                setOnItemClickListener(provideOnItemClickListener())
+            }
+            addItemDecoration(provideCustomMargin())
         }
     }
 
@@ -71,6 +93,23 @@ class MovieDetailActivity : BaseBindingActivity<ActivityMovieDetailBinding>() {
             .build()
             .inject(this)
     }
+
+    private fun provideOnItemClickListener() =
+        object : BaseRecyclerAdapter.AdapterOnClick {
+            override fun onRecyclerItemClicked(extra: String) {
+                val uri = Uri.parse("https://www.youtube.com/watch?v=$extra")
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+//                intent.setPackage("com.google.android.youtube")
+                startActivity(intent)
+            }
+        }
+
+    private fun provideCustomMargin() =
+        CustomRvMargin(
+            this@MovieDetailActivity,
+            0,
+            CustomRvMargin.LINEAR_VERTICAL
+        )
 
     private fun getMovieDetailModule() = MovieDetailModule(object : MovieDetailContract.View {
         override fun setMovieResult(movie: MovieModel) {
@@ -118,6 +157,27 @@ class MovieDetailActivity : BaseBindingActivity<ActivityMovieDetailBinding>() {
                     }
                 }
             }
+        }
+
+        override fun setMovieTrailerResult(trailer: List<MovieTrailerModel>) {
+            if (trailer.isEmpty()) {
+                binding.rvItemTrailer.isVisible = false
+                binding.tvNoTrailer.isVisible = true
+            } else {
+                binding.tvNoTrailer.isVisible = false
+                binding.rvItemTrailer.isVisible = true
+                rvAdapter.clearAndNotify()
+                rvAdapter.insertAndNotify(filterTrailer(trailer))
+            }
+        }
+
+        private fun filterTrailer(trailerModel: List<MovieTrailerModel>): List<MovieTrailerModel> {
+            val trailerVideo = mutableListOf<MovieTrailerModel>()
+            trailerModel.map { it ->
+                if (it.type == "Trailer")
+                    trailerVideo.add(it)
+            }
+            return trailerVideo
         }
 
         override fun setFavoriteState(isFavorite: Boolean) {

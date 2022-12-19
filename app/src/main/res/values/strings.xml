@@ -12,4 +12,6 @@
     <string name="movie_title">Movie Title\nMovie Title</string>
     <string name="dummy_text">Dummy Text</string>
     <string name="favorite_movie">Favorite Movie</string>
+    <string name="no_trailer">This movie does not include any trailer</string>
+    <string name="this_movie_does_not_include_trailer">This movie does not include trailer</string>
 </resources>
