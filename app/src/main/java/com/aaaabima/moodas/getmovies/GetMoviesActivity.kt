@@ -24,6 +24,7 @@ import com.aaaabima.moodas.getmovies.adapter.GetMoviesAdapter
 import com.aaaabima.moodas.getmovies.model.MovieModel
 import com.aaaabima.moodas.moviedetail.MovieDetailActivity
 import com.aaaabima.moodas.util.CustomRvMargin
+import com.aaaabima.moodas.util.toast
 import timber.log.Timber
 import javax.inject.Inject
 

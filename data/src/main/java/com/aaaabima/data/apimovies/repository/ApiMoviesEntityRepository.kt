@@ -28,19 +28,19 @@ class ApiMoviesEntityRepository @Inject constructor(
     private fun getRemoteRepository() =
         apiMoviesEntityDataFactory.createApiMoviesEntityData(SourceType.NETWORK)
 
-    override fun getNowPlayingMovies(apiKey: String, refresh: Boolean): Observable<List<Movie>> {
+    override fun getNowPlayingMovies(apiKey: String): Observable<List<Movie>> {
         return getNowPlayingMoviesFromRemote(apiKey)
     }
 
-    override fun getPopularMovies(apiKey: String, refresh: Boolean): Observable<List<Movie>> {
+    override fun getPopularMovies(apiKey: String): Observable<List<Movie>> {
         TODO("Not yet implemented")
     }
 
-    override fun getTopRatedMovies(apiKey: String, refresh: Boolean): Observable<List<Movie>> {
+    override fun getTopRatedMovies(apiKey: String): Observable<List<Movie>> {
         TODO("Not yet implemented")
     }
 
-    override fun getMovieDetail(id: Int, apiKey: String, ): Observable<Movie> {
+    override fun getMovieDetail(id: String, apiKey: String): Observable<Movie> {
         return getMovieDetailFromRemote(id, apiKey)
     }
 
@@ -58,7 +58,7 @@ class ApiMoviesEntityRepository @Inject constructor(
     }
 
     private fun getMovieDetailFromRemote(
-        id: Int,
+        id: String,
         apiKey: String,
     ): Observable<Movie> {
         return getRemoteRepository().getMovieDetail(id, apiKey)

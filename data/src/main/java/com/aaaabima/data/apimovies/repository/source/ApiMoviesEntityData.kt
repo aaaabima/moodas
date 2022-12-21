@@ -23,7 +23,7 @@ interface ApiMoviesEntityData {
     fun getTopRatedMovies(apiKey: String): Observable<List<MovieEntity>>
 
     fun getMovieDetail(
-        id: Int,
+        id: String,
         apiKey: String,
     ): Observable<MovieEntity>
 

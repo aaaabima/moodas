@@ -24,7 +24,7 @@ class GetMoviesPresenter @Inject constructor(
         view.showProgress()
         getNowPlayingMovies.execute(
             GetNowPlayingMovies.Params.createGetMoviesRequest(
-                GetNowPlayingMoviesRequest(apiKey, refresh)
+                GetNowPlayingMoviesRequest(apiKey)
             ), onSuccess = { movieResult ->
                 view.setMovieResult(movieResult.map { it.toModel() })
                 view.dismissProgress()

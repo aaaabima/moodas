@@ -11,7 +11,7 @@ package com.aaaabima.moodas.getmovies.model
  * @version MovieModel, v 0.1 07/12/22 10.57 by Abim (Moch Arya Bima A)
  */
 data class MovieModel(
-    val id: Int,
+    val id: String,
     val original_title: String,
     val overview: String,
     val poster_path: String,

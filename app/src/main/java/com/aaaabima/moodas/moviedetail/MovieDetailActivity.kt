@@ -71,7 +71,7 @@ class MovieDetailActivity : BaseBindingActivity<ActivityMovieDetailBinding>() {
         initInjector()
         initRecyclerView()
         id.let {
-            presenter.getMovieDetail(it, BuildConfig.API_KEY)
+            presenter.getMovieDetail(it.toString(), BuildConfig.API_KEY)
             presenter.getMovieTrailer(it, BuildConfig.API_KEY)
         }
     }
@@ -99,7 +99,6 @@ class MovieDetailActivity : BaseBindingActivity<ActivityMovieDetailBinding>() {
             override fun onRecyclerItemClicked(extra: String) {
                 val uri = Uri.parse("https://www.youtube.com/watch?v=$extra")
                 val intent = Intent(Intent.ACTION_VIEW, uri)
-//                intent.setPackage("com.google.android.youtube")
                 startActivity(intent)
             }
         }
@@ -107,7 +106,7 @@ class MovieDetailActivity : BaseBindingActivity<ActivityMovieDetailBinding>() {
     private fun provideCustomMargin() =
         CustomRvMargin(
             this@MovieDetailActivity,
-            0,
+            8,
             CustomRvMargin.LINEAR_VERTICAL
         )
 

@@ -34,7 +34,7 @@ class MovieDetailPresenter @Inject constructor(
     private val isFavoriteMovie: IsFavoriteMovie,
 ) : MovieDetailContract.Presenter {
 
-    override fun getMovieDetail(id: Int, apiKey: String) {
+    override fun getMovieDetail(id: String, apiKey: String) {
         view.showProgress()
         getMovieDetail.execute(
             GetMovieDetail.Params.createGetMovieDetailRequest(

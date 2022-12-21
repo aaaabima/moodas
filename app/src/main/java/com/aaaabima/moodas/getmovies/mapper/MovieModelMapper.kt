@@ -37,7 +37,7 @@ fun MovieModel.toDomain() = Movie(
 )
 
 fun MovieModel.toFavoriteMovieModel() = FavoriteMovieModel(
-    id = id,
+    id = id.toInt(),
     original_title = original_title,
     overview = overview,
     poster_path = poster_path,

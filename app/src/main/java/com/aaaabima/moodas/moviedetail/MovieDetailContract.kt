@@ -20,7 +20,7 @@ interface MovieDetailContract {
 
     interface Presenter : BasePresenter {
 
-        fun getMovieDetail(id: Int, apiKey: String)
+        fun getMovieDetail(id: String, apiKey: String)
 
         fun getMovieTrailer(id: Int, apiKey: String)
 
