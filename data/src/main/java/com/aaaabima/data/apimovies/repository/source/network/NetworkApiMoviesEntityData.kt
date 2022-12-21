@@ -8,6 +8,7 @@ package com.aaaabima.data.apimovies.repository.source.network
 
 import com.aaaabima.data.apimovies.mapper.toEntity
 import com.aaaabima.data.apimovies.model.MovieEntity
+import com.aaaabima.data.apimovies.model.MovieTrailerEntity
 import com.aaaabima.data.apimovies.repository.source.ApiMoviesEntityData
 import com.aaaabima.data.network.MovieAPI
 import io.reactivex.Observable
@@ -19,7 +20,7 @@ import javax.inject.Inject
  */
 class NetworkApiMoviesEntityData @Inject constructor(
     private val movieAPI: MovieAPI
-): ApiMoviesEntityData {
+) : ApiMoviesEntityData {
 
     override fun getNowPlayingMovies(apiKey: String): Observable<List<MovieEntity>> {
         return movieAPI.getNowPlayingMovies(apiKey).map { response ->
@@ -45,10 +46,17 @@ class NetworkApiMoviesEntityData @Inject constructor(
         }
     }
 
-    override fun getMovieDetail(id: Int, apiKey: String): Observable<MovieEntity> {
+    override fun getMovieDetail(id: String, apiKey: String): Observable<MovieEntity> {
         return movieAPI.getMovieDetail(id, apiKey).map { response ->
             response.toEntity()
         }
     }
 
+    override fun getMovieTrailer(id: Int, apiKey: String): Observable<List<MovieTrailerEntity>> {
+        return movieAPI.getMovieTrailer(id, apiKey).map { response ->
+            response.results?.map {
+                it!!.toEntity()
+            }
+        }
+    }
 }

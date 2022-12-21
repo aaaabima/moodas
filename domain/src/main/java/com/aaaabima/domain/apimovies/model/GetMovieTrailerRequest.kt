@@ -8,6 +8,6 @@ package com.aaaabima.domain.apimovies.model
 
 /**
  * @author Abim (Moch Arya Bima A) (i-arya.agfian@dana.id)
- * @version GetMovieDetailRequest, v 0.1 05/12/22 08.32 by Abim (Moch Arya Bima A)
+ * @version GetMovieTrailerRequest, v 0.1 2022/12/16 17:52 by Abim (Moch Arya Bima A)
  */
-data class GetMovieDetailRequest(val id: String, val apiKey: String)
+data class GetMovieTrailerRequest (val id: Int, val apiKey: String)

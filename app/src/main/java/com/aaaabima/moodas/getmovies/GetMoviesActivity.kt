@@ -6,7 +6,10 @@
 
 package com.aaaabima.moodas.getmovies
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aaaabima.moodas.BuildConfig
@@ -16,10 +19,12 @@ import com.aaaabima.moodas.base.BaseRecyclerAdapter
 import com.aaaabima.moodas.databinding.ActivityGetMoviesBinding
 import com.aaaabima.moodas.di.component.DaggerGetMoviesComponent
 import com.aaaabima.moodas.di.module.GetMoviesModule
+import com.aaaabima.moodas.favoritemovie.FavoriteMovieActivity
 import com.aaaabima.moodas.getmovies.adapter.GetMoviesAdapter
 import com.aaaabima.moodas.getmovies.model.MovieModel
 import com.aaaabima.moodas.moviedetail.MovieDetailActivity
 import com.aaaabima.moodas.util.CustomRvMargin
+import com.aaaabima.moodas.util.toast
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -54,6 +59,24 @@ class GetMoviesActivity : BaseBindingActivity<ActivityGetMoviesBinding>() {
             .inject(this)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.get_movies_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.favorite -> {
+                val intent = Intent(this@GetMoviesActivity, FavoriteMovieActivity::class.java)
+                startActivity(intent)
+                true
+            }
+
+            else -> true
+        }
+    }
+
     private fun getGetMoviesModule() = GetMoviesModule(object : GetMoviesContract.View {
         override fun setMovieResult(movies: List<MovieModel>) {
             if (movies.isEmpty()) {
@@ -63,7 +86,6 @@ class GetMoviesActivity : BaseBindingActivity<ActivityGetMoviesBinding>() {
                 binding.tvNoMovie.isVisible = false
                 binding.rvItemMovie.isVisible = true
                 rvAdapter.clearAndNotify()
-                Timber.d("RESUlT: $movies")
                 rvAdapter.insertAndNotify(movies)
             }
         }

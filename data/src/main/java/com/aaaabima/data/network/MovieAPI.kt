@@ -6,9 +6,7 @@
 
 package com.aaaabima.data.network
 
-import com.aaaabima.data.apimovies.repository.source.network.response.MovieDetailResponse
-import com.aaaabima.data.apimovies.repository.source.network.response.MovieNowPlayingResponse
-import com.aaaabima.data.apimovies.repository.source.network.response.MovieRatedResponse
+import com.aaaabima.data.apimovies.repository.source.network.response.*
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -37,9 +35,13 @@ interface MovieAPI {
 
     @GET(Constant.Network.Movie.Detail)
     fun getMovieDetail(
-        @Path("param") id: Int,
+        @Path("param") id: String,
         @Query("api_key") apiKey: String,
     ): Observable<MovieDetailResponse>
 
-
+    @GET(Constant.Network.Movie.Videos)
+    fun getMovieTrailer(
+        @Path("param") id: Int,
+        @Query("api_key") apiKey: String,
+    ): Observable<MovieTrailerResponse>
 }

@@ -22,7 +22,7 @@ import javax.inject.Inject
  */
 class FavoriteMovieAdapter @Inject constructor(
     context: Context
-): BaseRecyclerAdapter<FavoriteMovieModel, FavoriteMovieAdapter.ViewHolder>(context) {
+) : BaseRecyclerAdapter<FavoriteMovieModel, FavoriteMovieAdapter.ViewHolder>(context) {
 
     override fun getResLayout(type: Int): Int = R.layout.item_movie
 
@@ -31,7 +31,7 @@ class FavoriteMovieAdapter @Inject constructor(
         return ViewHolder(binding)
     }
 
-    inner class ViewHolder(var binding: ItemMovieBinding): BaseViewHolder(binding) {
+    inner class ViewHolder(var binding: ItemMovieBinding) : BaseViewHolder(binding) {
 
         override fun onBind(model: FavoriteMovieModel) {
             val imageUrl = "https://image.tmdb.org/t/p/original${model.poster_path}"

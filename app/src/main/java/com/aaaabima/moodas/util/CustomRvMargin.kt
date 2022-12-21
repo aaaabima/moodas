@@ -50,11 +50,9 @@ class CustomRvMargin(
 
             LINEAR_VERTICAL -> {
                 with(outRect) {
-                    if (parent.getChildAdapterPosition(view) == 0) {
-                        top = customMargin
-                    }
-                    left = customMargin
-                    right = customMargin
+//                    top = customMargin
+//                    left = customMargin
+//                    right = customMargin
                     bottom = customMargin
                 }
             }

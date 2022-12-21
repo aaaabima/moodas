@@ -26,7 +26,7 @@ fun Movie.toEntity(): MovieEntity {
     )
 }
 
-internal fun MovieEntity.toDomain(): Movie{
+internal fun MovieEntity.toDomain(): Movie {
     return Movie(
         this.id!!,
         this.original_title.orEmpty(),
@@ -35,6 +35,6 @@ internal fun MovieEntity.toDomain(): Movie{
         this.genres.orEmpty(),
         this.release_date.orEmpty(),
         this.popularity ?: 0,
-        this.runtime?: 0
+        this.runtime ?: 0
     )
 }
