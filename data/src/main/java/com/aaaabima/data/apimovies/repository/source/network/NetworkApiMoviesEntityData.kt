@@ -38,7 +38,6 @@ class NetworkApiMoviesEntityData @Inject constructor(
             response.results?.map { movie ->
                 movie.toEntity()
             }
-
         }
     }
 

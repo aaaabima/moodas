@@ -33,11 +33,11 @@ class ApiMoviesEntityRepository @Inject constructor(
     }
 
     override fun getPopularMovies(): Observable<List<Movie>> {
-        TODO("Not yet implemented")
+        return getPopularMoviesFromRemote()
     }
 
     override fun getTopRatedMovies(): Observable<List<Movie>> {
-        TODO("Not yet implemented")
+        return getTopRatedMoviesFromRemote()
     }
 
     override fun getMovieDetail(id: Int): Observable<Movie> {
@@ -50,6 +50,20 @@ class ApiMoviesEntityRepository @Inject constructor(
 
     private fun getNowPlayingMoviesFromRemote(): Observable<List<Movie>> {
         return getRemoteRepository().getNowPlayingMovies()
+            .flatMap { movieResult ->
+                movieResult.mapListToDomain()
+            }
+    }
+
+    private fun getPopularMoviesFromRemote(): Observable<List<Movie>> {
+        return getRemoteRepository().getPopularMovies()
+            .flatMap { movieResult ->
+                movieResult.mapListToDomain()
+            }
+    }
+
+    private fun getTopRatedMoviesFromRemote(): Observable<List<Movie>> {
+        return getRemoteRepository().getTopRatedMovies()
             .flatMap { movieResult ->
                 movieResult.mapListToDomain()
             }
