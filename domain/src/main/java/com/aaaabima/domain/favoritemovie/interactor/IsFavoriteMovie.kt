@@ -7,8 +7,6 @@
 package com.aaaabima.domain.favoritemovie.interactor
 
 import com.aaaabima.domain.base.BaseUseCase
-import com.aaaabima.domain.favoritemovie.model.InsertFavoriteMovieRequest
-import com.aaaabima.domain.favoritemovie.model.IsFavoriteMovieRequest
 import com.aaaabima.domain.favoritemovie.repository.FavoriteMovieRepository
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -19,19 +17,8 @@ import javax.inject.Inject
  */
 class IsFavoriteMovie @Inject constructor(
     private val favoriteMovieRepository: FavoriteMovieRepository
-) : BaseUseCase<IsFavoriteMovie.Params, Boolean>() {
+) : BaseUseCase<String, Boolean>() {
 
-    override fun buildUseCase(params: Params): Observable<Boolean> {
-        return favoriteMovieRepository.isFavoriteMovie(
-            params.isFavoriteMovie.id
-        )
-    }
-
-    class Params constructor(internal val isFavoriteMovie: IsFavoriteMovieRequest) {
-        companion object {
-
-            fun createInsertFavoriteMovieRequest(request: IsFavoriteMovieRequest) =
-                Params(request)
-        }
-    }
+    override fun buildUseCase(params: String): Observable<Boolean> =
+        favoriteMovieRepository.isFavoriteMovie(params)
 }

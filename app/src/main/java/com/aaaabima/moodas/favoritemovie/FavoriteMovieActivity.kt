@@ -6,11 +6,11 @@
 
 package com.aaaabima.moodas.favoritemovie
 
-import com.aaaabima.moodas.R
-import com.aaaabima.moodas.base.BaseBindingActivity
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
+import com.aaaabima.moodas.R
+import com.aaaabima.moodas.base.BaseBindingActivity
 import com.aaaabima.moodas.base.BaseRecyclerAdapter
 import com.aaaabima.moodas.databinding.ActivityFavoriteMovieBinding
 import com.aaaabima.moodas.di.component.DaggerFavoriteMovieComponent
@@ -112,4 +112,9 @@ class FavoriteMovieActivity : BaseBindingActivity<ActivityFavoriteMovieBinding>(
         }
 
     })
+
+    override fun onDestroy() {
+        presenter.destroy()
+        super.onDestroy()
+    }
 }

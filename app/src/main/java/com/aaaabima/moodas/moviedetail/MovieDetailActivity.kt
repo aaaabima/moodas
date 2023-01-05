@@ -14,7 +14,6 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aaaabima.moodas.BuildConfig
 import com.aaaabima.moodas.R
 import com.aaaabima.moodas.base.BaseBindingActivity
 import com.aaaabima.moodas.base.BaseRecyclerAdapter
@@ -71,8 +70,8 @@ class MovieDetailActivity : BaseBindingActivity<ActivityMovieDetailBinding>() {
         initInjector()
         initRecyclerView()
         id.let {
-            presenter.getMovieDetail(it.toString(), BuildConfig.API_KEY)
-            presenter.getMovieTrailer(it, BuildConfig.API_KEY)
+            presenter.getMovieDetail(it)
+            presenter.getMovieTrailer(it)
         }
     }
 
@@ -128,7 +127,7 @@ class MovieDetailActivity : BaseBindingActivity<ActivityMovieDetailBinding>() {
                         presenter.formatDisplayText("Title", presenter.formatRuntime(it.runtime))
                     tvPopularity.text =
                         presenter.formatDisplayText("Popularity", it.popularity.toString())
-                    presenter.isFavoriteMovie(it.id.toString())
+                    presenter.isFavoriteMovie(it.id)
                     isFavorited.observe(this@MovieDetailActivity) { favorite ->
                         if (favorite) {
                             Glide.with(this@MovieDetailActivity)

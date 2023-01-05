@@ -11,9 +11,7 @@ import com.aaaabima.data.favoritemovie.model.FavoriteMovieEntity
 import com.aaaabima.data.favoritemovie.repository.source.FavoriteMovieEntityData
 import com.aaaabima.data.favoritemovie.repository.source.local.dao.FavoriteMovieEntityDao
 import com.aaaabima.domain.favoritemovie.model.FavoriteMovie
-import io.reactivex.Completable
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -22,23 +20,19 @@ import javax.inject.Inject
  */
 class PersistenceFavoriteMovieEntityData @Inject constructor(
     private val favoriteMovieEntityDao: FavoriteMovieEntityDao,
-): FavoriteMovieEntityData {
+) : FavoriteMovieEntityData {
 
     override fun getFavoriteMovies(): Observable<List<FavoriteMovieEntity>> {
         return favoriteMovieEntityDao.getFavoriteMovies()
     }
 
     override fun insertFavoriteMovie(movie: FavoriteMovie): Observable<Int> {
-        Completable.fromRunnable {
-            favoriteMovieEntityDao.insertFavoriteMovie(movie.toEntity())
-        }.subscribeOn(Schedulers.io()).subscribe()
+        favoriteMovieEntityDao.insertFavoriteMovie(movie.toEntity())
         return Observable.just(1)
     }
 
     override fun deleteFavoriteMovie(movie: FavoriteMovie): Observable<Int> {
-        Completable.fromRunnable {
-            favoriteMovieEntityDao.deleteFavoriteMovie(movie.toEntity())
-        }.subscribeOn(Schedulers.io()).subscribe()
+        favoriteMovieEntityDao.deleteFavoriteMovie(movie.toEntity())
         return Observable.just(1)
     }
 

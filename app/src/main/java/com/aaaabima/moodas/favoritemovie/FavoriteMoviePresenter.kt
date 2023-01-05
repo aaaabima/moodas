@@ -6,16 +6,9 @@
 
 package com.aaaabima.moodas.favoritemovie
 
-import com.aaaabima.domain.apimovies.interactor.GetMovieDetail
-import com.aaaabima.domain.apimovies.model.GetMovieDetailRequest
 import com.aaaabima.domain.base.NoParams
-import com.aaaabima.domain.favoritemovie.interactor.DeleteFavoriteMovie
 import com.aaaabima.domain.favoritemovie.interactor.GetFavoriteMovies
-import com.aaaabima.domain.favoritemovie.interactor.InsertFavoriteMovie
-import com.aaaabima.domain.favoritemovie.interactor.IsFavoriteMovie
 import com.aaaabima.moodas.favoritemovie.mapper.toModel
-import com.aaaabima.moodas.favoritemovie.model.FavoriteMovieModel
-import com.aaaabima.moodas.getmovies.mapper.toModel
 import javax.inject.Inject
 
 /**

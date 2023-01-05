@@ -28,50 +28,56 @@ class ApiMoviesEntityRepository @Inject constructor(
     private fun getRemoteRepository() =
         apiMoviesEntityDataFactory.createApiMoviesEntityData(SourceType.NETWORK)
 
-    override fun getNowPlayingMovies(apiKey: String): Observable<List<Movie>> {
-        return getNowPlayingMoviesFromRemote(apiKey)
+    override fun getNowPlayingMovies(): Observable<List<Movie>> {
+        return getNowPlayingMoviesFromRemote()
     }
 
-    override fun getPopularMovies(apiKey: String): Observable<List<Movie>> {
-        TODO("Not yet implemented")
+    override fun getPopularMovies(): Observable<List<Movie>> {
+        return getPopularMoviesFromRemote()
     }
 
-    override fun getTopRatedMovies(apiKey: String): Observable<List<Movie>> {
-        TODO("Not yet implemented")
+    override fun getTopRatedMovies(): Observable<List<Movie>> {
+        return getTopRatedMoviesFromRemote()
     }
 
-    override fun getMovieDetail(id: String, apiKey: String): Observable<Movie> {
-        return getMovieDetailFromRemote(id, apiKey)
+    override fun getMovieDetail(id: Int): Observable<Movie> {
+        return getMovieDetailFromRemote(id)
     }
 
-    override fun getMovieTrailer(id: Int, apiKey: String): Observable<List<MovieTrailer>> {
-        return getMovieTrailerFromRemote(id, apiKey)
+    override fun getMovieTrailer(id: Int): Observable<List<MovieTrailer>> {
+        return getMovieTrailerFromRemote(id)
     }
 
-    private fun getNowPlayingMoviesFromRemote(
-        apiKey: String
-    ): Observable<List<Movie>> {
-        return getRemoteRepository().getNowPlayingMovies(apiKey)
+    private fun getNowPlayingMoviesFromRemote(): Observable<List<Movie>> {
+        return getRemoteRepository().getNowPlayingMovies()
             .flatMap { movieResult ->
                 movieResult.mapListToDomain()
             }
     }
 
-    private fun getMovieDetailFromRemote(
-        id: String,
-        apiKey: String,
-    ): Observable<Movie> {
-        return getRemoteRepository().getMovieDetail(id, apiKey)
+    private fun getPopularMoviesFromRemote(): Observable<List<Movie>> {
+        return getRemoteRepository().getPopularMovies()
+            .flatMap { movieResult ->
+                movieResult.mapListToDomain()
+            }
+    }
+
+    private fun getTopRatedMoviesFromRemote(): Observable<List<Movie>> {
+        return getRemoteRepository().getTopRatedMovies()
+            .flatMap { movieResult ->
+                movieResult.mapListToDomain()
+            }
+    }
+
+    private fun getMovieDetailFromRemote(id: Int): Observable<Movie> {
+        return getRemoteRepository().getMovieDetail(id)
             .map { movieResult ->
                 movieResult.toDomain()
             }
     }
 
-    private fun getMovieTrailerFromRemote(
-        id: Int,
-        apiKey: String,
-    ): Observable<List<MovieTrailer>> {
-        return getRemoteRepository().getMovieTrailer(id, apiKey)
+    private fun getMovieTrailerFromRemote(id: Int): Observable<List<MovieTrailer>> {
+        return getRemoteRepository().getMovieTrailer(id)
             .flatMap { movie ->
                 movie.mapListToDomainTrailer()
             }
