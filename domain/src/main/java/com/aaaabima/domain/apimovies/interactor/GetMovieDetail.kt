@@ -6,7 +6,6 @@
 
 package com.aaaabima.domain.apimovies.interactor
 
-import com.aaaabima.domain.apimovies.model.GetMovieDetailRequest
 import com.aaaabima.domain.apimovies.model.Movie
 import com.aaaabima.domain.apimovies.repository.ApiMoviesRepository
 import com.aaaabima.domain.base.BaseUseCase
@@ -19,19 +18,9 @@ import javax.inject.Inject
  */
 class GetMovieDetail @Inject constructor(
     private val apiMoviesRepository: ApiMoviesRepository
-) : BaseUseCase<GetMovieDetail.Params, Movie>() {
+) : BaseUseCase<Int, Movie>() {
 
-    override fun buildUseCase(params: Params): Observable<Movie> {
-        return apiMoviesRepository.getMovieDetail(
-            params.getMovieDetailRequest.id,
-            params.getMovieDetailRequest.apiKey,
-        )
-    }
+    override fun buildUseCase(params: Int): Observable<Movie> =
+        apiMoviesRepository.getMovieDetail(params)
 
-    class Params constructor(internal val getMovieDetailRequest: GetMovieDetailRequest) {
-        companion object {
-
-            fun createGetMovieDetailRequest(request: GetMovieDetailRequest) = Params(request)
-        }
-    }
 }

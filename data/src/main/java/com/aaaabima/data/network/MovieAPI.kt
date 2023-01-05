@@ -35,7 +35,7 @@ interface MovieAPI {
 
     @GET(Constant.Network.Movie.Detail)
     fun getMovieDetail(
-        @Path("param") id: String,
+        @Path("param") id: Int,
         @Query("api_key") apiKey: String,
     ): Observable<MovieDetailResponse>
 

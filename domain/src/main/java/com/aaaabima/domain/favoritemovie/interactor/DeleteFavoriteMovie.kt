@@ -6,7 +6,6 @@
 
 package com.aaaabima.domain.favoritemovie.interactor
 
-import com.aaaabima.domain.apimovies.model.GetMovieDetailRequest
 import com.aaaabima.domain.base.BaseUseCase
 import com.aaaabima.domain.favoritemovie.model.DeleteFavoriteMovieRequest
 import com.aaaabima.domain.favoritemovie.repository.FavoriteMovieRepository
