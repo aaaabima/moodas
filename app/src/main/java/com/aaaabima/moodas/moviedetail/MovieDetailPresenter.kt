@@ -8,8 +8,6 @@ package com.aaaabima.moodas.moviedetail
 
 import com.aaaabima.domain.apimovies.interactor.GetMovieDetail
 import com.aaaabima.domain.apimovies.interactor.GetMovieTrailer
-import com.aaaabima.domain.apimovies.model.GetMovieDetailRequest
-import com.aaaabima.domain.apimovies.model.GetMovieTrailerRequest
 import com.aaaabima.domain.favoritemovie.interactor.DeleteFavoriteMovie
 import com.aaaabima.domain.favoritemovie.interactor.InsertFavoriteMovie
 import com.aaaabima.domain.favoritemovie.interactor.IsFavoriteMovie
@@ -34,12 +32,10 @@ class MovieDetailPresenter @Inject constructor(
     private val isFavoriteMovie: IsFavoriteMovie,
 ) : MovieDetailContract.Presenter {
 
-    override fun getMovieDetail(id: String, apiKey: String) {
+    override fun getMovieDetail(id: Int) {
         view.showProgress()
         getMovieDetail.execute(
-            GetMovieDetail.Params.createGetMovieDetailRequest(
-                GetMovieDetailRequest(id, apiKey)
-            ), onSuccess = { movie ->
+            params = id, onSuccess = { movie ->
                 view.setMovieResult(movie.toModel())
                 view.dismissProgress()
             }, onError = {
@@ -49,13 +45,11 @@ class MovieDetailPresenter @Inject constructor(
         )
     }
 
-    override fun getMovieTrailer(id: Int, apiKey: String) {
+    override fun getMovieTrailer(id: Int) {
         view.showProgress()
         getMovieTrailer.execute(
-            GetMovieTrailer.Params.createGetMovieTrailerRequest(
-                GetMovieTrailerRequest(id, apiKey)
-            ), onSuccess = { trailer ->
-                view.setMovieTrailerResult( trailer.map { it.toModel() })
+            params = id, onSuccess = { trailer ->
+                view.setMovieTrailerResult(trailer.map { it.toModel() })
                 view.dismissProgress()
             }, onError = {
                 view.onError(it.message)

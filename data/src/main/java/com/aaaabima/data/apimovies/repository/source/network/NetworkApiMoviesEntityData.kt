@@ -6,6 +6,7 @@
 
 package com.aaaabima.data.apimovies.repository.source.network
 
+import com.aaaabima.data.BuildConfig
 import com.aaaabima.data.apimovies.mapper.toEntity
 import com.aaaabima.data.apimovies.model.MovieEntity
 import com.aaaabima.data.apimovies.model.MovieTrailerEntity
@@ -22,7 +23,9 @@ class NetworkApiMoviesEntityData @Inject constructor(
     private val movieAPI: MovieAPI
 ) : ApiMoviesEntityData {
 
-    override fun getNowPlayingMovies(apiKey: String): Observable<List<MovieEntity>> {
+    private val apiKey by lazy { BuildConfig.API_KEY }
+
+    override fun getNowPlayingMovies(): Observable<List<MovieEntity>> {
         return movieAPI.getNowPlayingMovies(apiKey).map { response ->
             response.results?.map { movie ->
                 movie.toEntity()
@@ -30,32 +33,33 @@ class NetworkApiMoviesEntityData @Inject constructor(
         }
     }
 
-    override fun getPopularMovies(apiKey: String): Observable<List<MovieEntity>> {
+    override fun getPopularMovies(): Observable<List<MovieEntity>> {
         return movieAPI.getPopularMovies(apiKey).map { response ->
             response.results?.map { movie ->
-                movie!!.toEntity()
+                movie.toEntity()
             }
+
         }
     }
 
-    override fun getTopRatedMovies(apiKey: String): Observable<List<MovieEntity>> {
+    override fun getTopRatedMovies(): Observable<List<MovieEntity>> {
         return movieAPI.getTopRatedMovies(apiKey).map { response ->
             response.results?.map { movie ->
-                movie!!.toEntity()
+                movie.toEntity()
             }
         }
     }
 
-    override fun getMovieDetail(id: String, apiKey: String): Observable<MovieEntity> {
+    override fun getMovieDetail(id: Int): Observable<MovieEntity> {
         return movieAPI.getMovieDetail(id, apiKey).map { response ->
             response.toEntity()
         }
     }
 
-    override fun getMovieTrailer(id: Int, apiKey: String): Observable<List<MovieTrailerEntity>> {
+    override fun getMovieTrailer(id: Int): Observable<List<MovieTrailerEntity>> {
         return movieAPI.getMovieTrailer(id, apiKey).map { response ->
             response.results?.map {
-                it!!.toEntity()
+                it.toEntity()
             }
         }
     }

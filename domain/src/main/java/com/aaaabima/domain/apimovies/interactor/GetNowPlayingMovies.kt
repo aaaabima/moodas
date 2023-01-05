@@ -6,10 +6,10 @@
 
 package com.aaaabima.domain.apimovies.interactor
 
-import com.aaaabima.domain.apimovies.model.GetNowPlayingMoviesRequest
 import com.aaaabima.domain.apimovies.model.Movie
 import com.aaaabima.domain.apimovies.repository.ApiMoviesRepository
 import com.aaaabima.domain.base.BaseUseCase
+import com.aaaabima.domain.base.NoParams
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -19,18 +19,8 @@ import javax.inject.Inject
  */
 class GetNowPlayingMovies @Inject constructor(
     private val apiMoviesRepository: ApiMoviesRepository
-) : BaseUseCase<GetNowPlayingMovies.Params, List<Movie>>() {
+) : BaseUseCase<NoParams, List<Movie>>() {
 
-    override fun buildUseCase(params: Params): Observable<List<Movie>> {
-        return apiMoviesRepository.getNowPlayingMovies(
-            params.getNowPlayingMoviesRequest.apiKey
-        )
-    }
-
-    class Params constructor(internal val getNowPlayingMoviesRequest: GetNowPlayingMoviesRequest) {
-        companion object {
-
-            fun createGetMoviesRequest(request: GetNowPlayingMoviesRequest) = Params(request)
-        }
-    }
+    override fun buildUseCase(params: NoParams): Observable<List<Movie>> =
+        apiMoviesRepository.getNowPlayingMovies()
 }

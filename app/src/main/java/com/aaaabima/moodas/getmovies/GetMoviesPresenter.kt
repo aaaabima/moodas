@@ -7,7 +7,7 @@
 package com.aaaabima.moodas.getmovies
 
 import com.aaaabima.domain.apimovies.interactor.GetNowPlayingMovies
-import com.aaaabima.domain.apimovies.model.GetNowPlayingMoviesRequest
+import com.aaaabima.domain.base.NoParams
 import com.aaaabima.moodas.getmovies.mapper.toModel
 import javax.inject.Inject
 
@@ -23,9 +23,8 @@ class GetMoviesPresenter @Inject constructor(
     override fun getNowPlayingMovies(apiKey: String, refresh: Boolean) {
         view.showProgress()
         getNowPlayingMovies.execute(
-            GetNowPlayingMovies.Params.createGetMoviesRequest(
-                GetNowPlayingMoviesRequest(apiKey)
-            ), onSuccess = { movieResult ->
+            params = NoParams
+            , onSuccess = { movieResult ->
                 view.setMovieResult(movieResult.map { it.toModel() })
                 view.dismissProgress()
             }, onError = {

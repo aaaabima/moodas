@@ -16,25 +16,13 @@ import io.reactivex.Observable
  */
 interface ApiMoviesRepository {
 
-    fun getNowPlayingMovies(
-        apiKey: String
-    ): Observable<List<Movie>>
+    fun getNowPlayingMovies(): Observable<List<Movie>>
 
-    fun getPopularMovies(
-        apiKey: String
-    ): Observable<List<Movie>>
+    fun getPopularMovies(): Observable<List<Movie>>
 
-    fun getTopRatedMovies(
-        apiKey: String
-    ): Observable<List<Movie>>
+    fun getTopRatedMovies(): Observable<List<Movie>>
 
-    fun getMovieDetail(
-        id: String,
-        apiKey: String,
-    ): Observable<Movie>
+    fun getMovieDetail(id: Int): Observable<Movie>
 
-    fun getMovieTrailer(
-        id: Int,
-        apiKey: String,
-    ): Observable<List<MovieTrailer>>
+    fun getMovieTrailer(id: Int): Observable<List<MovieTrailer>>
 }
