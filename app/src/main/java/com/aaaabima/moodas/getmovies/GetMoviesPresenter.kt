@@ -20,11 +20,10 @@ class GetMoviesPresenter @Inject constructor(
     private val getNowPlayingMovies: GetNowPlayingMovies
 ) : GetMoviesContract.Presenter {
 
-    override fun getNowPlayingMovies(apiKey: String, refresh: Boolean) {
+    override fun getNowPlayingMovies(apiKey: String) {
         view.showProgress()
         getNowPlayingMovies.execute(
-            params = NoParams
-            , onSuccess = { movieResult ->
+            params = NoParams, onSuccess = { movieResult ->
                 view.setMovieResult(movieResult.map { it.toModel() })
                 view.dismissProgress()
             }, onError = {

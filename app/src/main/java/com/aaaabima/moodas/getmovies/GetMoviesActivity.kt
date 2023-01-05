@@ -24,7 +24,6 @@ import com.aaaabima.moodas.getmovies.adapter.GetMoviesAdapter
 import com.aaaabima.moodas.getmovies.model.MovieModel
 import com.aaaabima.moodas.moviedetail.MovieDetailActivity
 import com.aaaabima.moodas.util.CustomRvMargin
-import com.aaaabima.moodas.util.toast
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -36,8 +35,6 @@ class GetMoviesActivity : BaseBindingActivity<ActivityGetMoviesBinding>() {
     @Inject
     lateinit var presenter: GetMoviesPresenter
 
-    override fun contentView(): Int = R.layout.activity_get_movies
-
     override fun setupData(savedInstanceState: Bundle?) {}
 
     override fun getViewBinding(): ActivityGetMoviesBinding {
@@ -48,7 +45,7 @@ class GetMoviesActivity : BaseBindingActivity<ActivityGetMoviesBinding>() {
         getViewBinding()
         initInjector()
         initRecyclerView()
-        performGetMovies(refresh = true)
+        performGetMovies()
     }
 
     private fun initInjector() {
@@ -133,8 +130,8 @@ class GetMoviesActivity : BaseBindingActivity<ActivityGetMoviesBinding>() {
             CustomRvMargin.GRID_1
         )
 
-    private fun performGetMovies(refresh: Boolean) {
-        presenter.getNowPlayingMovies(BuildConfig.API_KEY, refresh)
+    private fun performGetMovies() {
+        presenter.getNowPlayingMovies(BuildConfig.API_KEY)
     }
 
     override fun onDestroy() {

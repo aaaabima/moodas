@@ -18,7 +18,7 @@ interface GetMoviesContract {
 
     interface Presenter : BasePresenter {
 
-        fun getNowPlayingMovies(apiKey: String, refresh: Boolean)
+        fun getNowPlayingMovies(apiKey: String)
     }
 
     interface View : BaseView {
