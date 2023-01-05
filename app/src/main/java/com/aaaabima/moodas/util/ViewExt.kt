@@ -44,11 +44,3 @@ fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable
         //.error(ContextCompat.getDrawable(context, R.drawable.error_no_picture))
         .into(this)
 }
-
-//@BindingAdapter("android:imageUrl")
-//fun loadImage(view: ImageView, url: String?) {
-//    view.loadImage(
-//        url,
-//        getProgressDrawable(view.context)
-//    )
-//}
