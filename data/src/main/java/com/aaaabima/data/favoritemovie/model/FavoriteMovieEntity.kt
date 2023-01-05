@@ -20,7 +20,7 @@ data class FavoriteMovieEntity (
 
     @ColumnInfo(name = "id")
     @PrimaryKey
-    var id: Int?,
+    var id: Int,
 
     @ColumnInfo(defaultValue = "")
     var original_title: String?,

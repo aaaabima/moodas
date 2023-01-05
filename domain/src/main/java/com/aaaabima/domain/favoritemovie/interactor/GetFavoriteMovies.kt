@@ -19,9 +19,8 @@ import javax.inject.Inject
  */
 class GetFavoriteMovies @Inject constructor(
     private val favoriteMovieRepository: FavoriteMovieRepository
-): BaseUseCase<NoParams, List<FavoriteMovie>>() {
+) : BaseUseCase<NoParams, List<FavoriteMovie>>() {
 
-    override fun buildUseCase(params: NoParams): Observable<List<FavoriteMovie>> {
-        return favoriteMovieRepository.getFavoriteMovies()
-    }
+    override fun buildUseCase(params: NoParams): Observable<List<FavoriteMovie>> =
+        favoriteMovieRepository.getFavoriteMovies()
 }

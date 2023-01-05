@@ -1,7 +1,7 @@
 /*
  * DANA.id
  * PT. Espay Debit Indonesia Koe.
- * Copyright (c) 2017-2022 All Rights Reserved.
+ * Copyright (c) 2017-2023 All Rights Reserved.
  */
 
 package com.aaaabima.domain.apimovies.interactor
@@ -15,12 +15,12 @@ import javax.inject.Inject
 
 /**
  * @author Abim (Moch Arya Bima A) (i-arya.agfian@dana.id)
- * @version GetNowPlayingMovies, v 0.1 05/12/22 09.07 by Abim (Moch Arya Bima A)
+ * @version GetTopRatedMovies, v 0.1 05/01/23 14.31 by Abim (Moch Arya Bima A)
  */
-class GetNowPlayingMovies @Inject constructor(
+class GetTopRatedMovies @Inject constructor(
     private val apiMoviesRepository: ApiMoviesRepository
 ) : BaseUseCase<NoParams, List<Movie>>() {
 
     override fun buildUseCase(params: NoParams): Observable<List<Movie>> =
-        apiMoviesRepository.getNowPlayingMovies()
+        apiMoviesRepository.getTopRatedMovies()
 }

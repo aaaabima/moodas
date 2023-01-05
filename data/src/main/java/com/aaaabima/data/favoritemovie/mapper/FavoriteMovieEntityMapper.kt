@@ -6,11 +6,7 @@
 
 package com.aaaabima.data.favoritemovie.mapper
 
-import com.aaaabima.data.apimovies.mapper.toDomain
-import com.aaaabima.data.apimovies.mapper.toEntity
-import com.aaaabima.data.apimovies.model.MovieEntity
 import com.aaaabima.data.favoritemovie.model.FavoriteMovieEntity
-import com.aaaabima.domain.apimovies.model.Movie
 import com.aaaabima.domain.favoritemovie.model.FavoriteMovie
 
 /**
@@ -33,13 +29,13 @@ fun FavoriteMovie.toEntity(): FavoriteMovieEntity {
 
 fun FavoriteMovieEntity.toDomain(): FavoriteMovie {
     return FavoriteMovie(
-        this.id!!,
+        this.id,
         this.original_title.orEmpty(),
         this.overview.orEmpty(),
         this.poster_path.orEmpty(),
         this.genres.orEmpty(),
         this.release_date.orEmpty(),
         this.popularity ?: 0,
-        this.runtime?: 0
+        this.runtime ?: 0
     )
 }

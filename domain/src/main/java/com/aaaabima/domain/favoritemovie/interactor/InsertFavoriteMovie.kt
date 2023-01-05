@@ -7,8 +7,7 @@
 package com.aaaabima.domain.favoritemovie.interactor
 
 import com.aaaabima.domain.base.BaseUseCase
-import com.aaaabima.domain.favoritemovie.model.DeleteFavoriteMovieRequest
-import com.aaaabima.domain.favoritemovie.model.InsertFavoriteMovieRequest
+import com.aaaabima.domain.favoritemovie.model.FavoriteMovie
 import com.aaaabima.domain.favoritemovie.repository.FavoriteMovieRepository
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -19,19 +18,8 @@ import javax.inject.Inject
  */
 class InsertFavoriteMovie @Inject constructor(
     private val favoriteMovieRepository: FavoriteMovieRepository
-) : BaseUseCase<InsertFavoriteMovie.Params, Int>() {
+) : BaseUseCase<FavoriteMovie, Int>() {
 
-    override fun buildUseCase(params: Params): Observable<Int> {
-        return favoriteMovieRepository.insertFavoriteMovie(
-            params.insertFavoriteMovieRequest.movie
-        )
-    }
-
-    class Params constructor(internal val insertFavoriteMovieRequest: InsertFavoriteMovieRequest) {
-        companion object {
-
-            fun createInsertFavoriteMovieRequest(request: InsertFavoriteMovieRequest) =
-                Params(request)
-        }
-    }
+    override fun buildUseCase(params: FavoriteMovie): Observable<Int> =
+        favoriteMovieRepository.insertFavoriteMovie(params)
 }
