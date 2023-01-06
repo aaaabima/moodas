@@ -57,8 +57,6 @@ class MovieDetailActivity : BaseBindingActivity<ActivityMovieDetailBinding>() {
         return ActivityMovieDetailBinding.inflate(layoutInflater)
     }
 
-    override fun contentView(): Int = R.layout.activity_movie_detail
-
     override fun setupData(savedInstanceState: Bundle?) {
         intent.getIntExtra(KEY_INTENT_ID, 0).let {
             id = it

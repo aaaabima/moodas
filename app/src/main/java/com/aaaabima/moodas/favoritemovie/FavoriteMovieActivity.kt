@@ -30,8 +30,6 @@ class FavoriteMovieActivity : BaseBindingActivity<ActivityFavoriteMovieBinding>(
     @Inject
     lateinit var presenter: FavoriteMoviePresenter
 
-    override fun contentView(): Int = R.layout.activity_favorite_movie
-
     override fun setupData(savedInstanceState: Bundle?) {}
 
     override fun setupView() {

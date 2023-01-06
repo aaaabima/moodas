@@ -21,16 +21,15 @@ import com.aaaabima.moodas.di.component.DaggerGetMoviesComponent
 import com.aaaabima.moodas.di.module.GetMoviesModule
 import com.aaaabima.moodas.favoritemovie.FavoriteMovieActivity
 import com.aaaabima.moodas.getmovies.adapter.GetMoviesAdapter
+import com.aaaabima.moodas.getmovies.adapter.GetMoviesPagerAdapter
 import com.aaaabima.moodas.getmovies.model.MovieModel
 import com.aaaabima.moodas.moviedetail.MovieDetailActivity
 import com.aaaabima.moodas.util.CustomRvMargin
+import com.google.android.material.tabs.TabLayoutMediator
 import timber.log.Timber
 import javax.inject.Inject
 
 class GetMoviesActivity : BaseBindingActivity<ActivityGetMoviesBinding>() {
-
-    @Inject
-    lateinit var rvAdapter: GetMoviesAdapter
 
     @Inject
     lateinit var presenter: GetMoviesPresenter
@@ -44,8 +43,14 @@ class GetMoviesActivity : BaseBindingActivity<ActivityGetMoviesBinding>() {
     override fun setupView() {
         getViewBinding()
         initInjector()
-        initRecyclerView()
-        performGetMovies()
+        setupViewPager()
+    }
+
+    private fun setupViewPager() {
+        binding.vpMain.adapter = GetMoviesPagerAdapter(supportFragmentManager, lifecycle)
+        TabLayoutMediator(binding.tabLayoutMain, binding.vpMain) { tab, position ->
+            tab.text = GetMoviesPagerAdapter.providePageNames()[position]
+        }.attach()
     }
 
     private fun initInjector() {
@@ -75,17 +80,6 @@ class GetMoviesActivity : BaseBindingActivity<ActivityGetMoviesBinding>() {
     }
 
     private fun getGetMoviesModule() = GetMoviesModule(object : GetMoviesContract.View {
-        override fun setMovieResult(movies: List<MovieModel>) {
-            if (movies.isEmpty()) {
-                binding.tvNoMovie.isVisible = true
-                binding.rvItemMovie.isVisible = false
-            } else {
-                binding.tvNoMovie.isVisible = false
-                binding.rvItemMovie.isVisible = true
-                rvAdapter.clearAndNotify()
-                rvAdapter.insertAndNotify(movies)
-            }
-        }
 
         override fun showProgress() {
             //
@@ -100,39 +94,6 @@ class GetMoviesActivity : BaseBindingActivity<ActivityGetMoviesBinding>() {
         }
 
     })
-
-    private fun initRecyclerView() {
-        binding.rvItemMovie.apply {
-            layoutManager = GridLayoutManager(this@GetMoviesActivity, 2)
-            adapter = rvAdapter.apply {
-                setOnItemClickListener(provideOnItemClickListener())
-            }
-            addItemDecoration(provideCustomMargin())
-        }
-    }
-
-    private fun provideOnItemClickListener() =
-        object : BaseRecyclerAdapter.AdapterOnClick {
-            override fun onRecyclerItemClicked(extra: String) {
-                startActivity(
-                    MovieDetailActivity.createIntent(
-                        this@GetMoviesActivity,
-                        extra.toInt()
-                    )
-                )
-            }
-        }
-
-    private fun provideCustomMargin() =
-        CustomRvMargin(
-            this@GetMoviesActivity,
-            8,
-            CustomRvMargin.GRID_1
-        )
-
-    private fun performGetMovies() {
-        presenter.getNowPlayingMovies(BuildConfig.API_KEY)
-    }
 
     override fun onDestroy() {
         presenter.destroy()

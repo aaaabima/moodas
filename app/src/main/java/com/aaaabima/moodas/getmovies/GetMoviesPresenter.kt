@@ -17,21 +17,7 @@ import javax.inject.Inject
  */
 class GetMoviesPresenter @Inject constructor(
     private val view: GetMoviesContract.View,
-    private val getNowPlayingMovies: GetNowPlayingMovies
 ) : GetMoviesContract.Presenter {
-
-    override fun getNowPlayingMovies(apiKey: String) {
-        view.showProgress()
-        getNowPlayingMovies.execute(
-            params = NoParams, onSuccess = { movieResult ->
-                view.setMovieResult(movieResult.map { it.toModel() })
-                view.dismissProgress()
-            }, onError = {
-                view.onError(it.message)
-                view.dismissProgress()
-            }
-        )
-    }
 
     override fun resume() {
         // no implementation
@@ -42,6 +28,6 @@ class GetMoviesPresenter @Inject constructor(
     }
 
     override fun destroy() {
-        getNowPlayingMovies.dispose()
+        // no implementation
     }
 }

@@ -16,4 +16,5 @@
     <string name="this_movie_does_not_include_trailer">This movie does not include trailer</string>
     <string name="trailer_title">Trailer Title</string>
     <string name="movie_trailer">Movie Trailer:</string>
+    <string name="now_playing_movies">Now Playing Movies</string>
 </resources>

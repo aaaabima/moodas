@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.aaaabima.moodas.MoodasApplication
 
 /**
  * @author Abim (Moch Arya Bima A) (i-arya.agfian@dana.id)
@@ -39,4 +40,7 @@ abstract class BaseBindingFragment<T : ViewBinding> : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupView()
     }
+
+    protected fun getApplicationComponent() =
+        (activity?.application as MoodasApplication).getApplicationComponent()
 }

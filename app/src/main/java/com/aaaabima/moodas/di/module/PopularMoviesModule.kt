@@ -8,6 +8,7 @@ package com.aaaabima.moodas.di.module
 
 import com.aaaabima.moodas.di.PerActivity
 import com.aaaabima.moodas.getmovies.PopularMoviesContract
+import com.aaaabima.moodas.getmovies.PopularMoviesPresenter
 import dagger.Module
 import dagger.Provides
 
@@ -27,6 +28,6 @@ class PopularMoviesModule(
     @PerActivity
     @Provides
     fun providePopularMoviesPresenter(
-        presenter: PopularMoviesContract.Presenter
+        presenter: PopularMoviesPresenter
     ): PopularMoviesContract.Presenter = presenter
 }

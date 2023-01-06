@@ -7,8 +7,6 @@
 package com.aaaabima.domain.apimovies.interactor
 
 import com.aaaabima.domain.BuildConfig
-import com.aaaabima.domain.apimovies.model.GetMovieDetailRequest
-import com.aaaabima.domain.apimovies.model.GetNowPlayingMoviesRequest
 import com.aaaabima.domain.apimovies.model.Movie
 import com.aaaabima.domain.apimovies.repository.ApiMoviesRepository
 import io.mockk.every
@@ -29,18 +27,16 @@ class GetMovieDetailTest {
 
     @Test
     fun `buildUseCase should invoke apiMoviesRepository#getNowPlayingMovies`() {
-        val requestInfo = GetMovieDetail.Params.createGetMovieDetailRequest(
-            GetMovieDetailRequest("19995", BuildConfig.API_KEY)
-        )
+        val requestInfo = 19995
         val getMovieDetailResult = mockGetMovieDetailResult()
         //given
-        every { apiMoviesRepository.getMovieDetail(any(), any()) } returns Observable.just(
+        every { apiMoviesRepository.getMovieDetail(any()) } returns Observable.just(
             getMovieDetailResult
         )
         //when
         getMovieDetail.buildUseCase(requestInfo)
         //then
-        verify { apiMoviesRepository.getMovieDetail(any(),any()) }
+        verify { apiMoviesRepository.getMovieDetail(any()) }
     }
 
     @After
